@@ -6,8 +6,16 @@ import router from './router'
 import ElementUI from 'element-ui'
 // import '../theme/index.css'
 import 'element-ui/lib/theme-chalk/index.css'
-Vue.config.productionTip = false
+import Axios from 'axios'
+
 Vue.use(ElementUI)
+Vue.config.productionTip = false
+Vue.prototype.$axios = Axios
+Vue.prototype.HOME = '/api'
+// ≈‰÷√ƒ¨»œURL
+Axios.defaults.baseURL = '/api'
+Axios.headers = {'Content-Type': 'application/json'}
+Axios.timeout = 1000 * 10
 
 /* eslint-disable no-new */
 new Vue({

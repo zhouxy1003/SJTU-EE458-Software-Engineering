@@ -31,7 +31,10 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="studentDialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="studentDialogFormVisible = false; addStudent('studentForm')">确 定</el-button>
+          <el-button
+            type="primary"
+            @click="studentDialogFormVisible = false; addStudent('studentForm')"
+          >确 定</el-button>
         </div>
       </el-dialog>
     </el-card>
@@ -60,7 +63,10 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="companyDialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="companyDialogFormVisible = false; addCompany('companyForm')">确 定</el-button>
+          <el-button
+            type="primary"
+            @click="companyDialogFormVisible = false; addCompany('companyForm')"
+          >确 定</el-button>
         </div>
       </el-dialog>
     </el-card>
@@ -94,10 +100,16 @@ export default {
   },
   methods: {
     addStudent(form) {
-      this.$http
-        .get("http://127.0.0.1:8000/api/add_student?sloginid=" + form.loginid
-         + "&spassword=" + form.password + "&sname=" + form.name
-         + "&sgrade" + form.grade + "&sschool" + form.school + "&smajor" + form.major)
+      this.$axios.get(this.HOME + '/api/add_student', {
+        params: {
+          sloginid: form.loginid,
+          spassword: form.password,
+          sname: form.name,
+          sgrade: form.grade,
+          sschool: form.school,
+          smajor: form.major
+        }
+      })
         .then(response => {
           var res = JSON.parse(response.bodyText);
           if (res.error_num === 0) {
@@ -110,10 +122,15 @@ export default {
       //this.$router.push("/Home");
     },
     addCompany(form) {
-      this.$http
-        .get("http://127.0.0.1:8000/api/add_company?cloginid=" + form.loginid
-         + "&cpassword=" + form.password + "&cname=" + form.name
-         + "&ctel" + form.tel + "&caddress" + form.address)
+      this.$axios.get(this.HOME + '/api/add_student', {
+        params: {
+          cloginid: form.loginid,
+          cpassword: form.password,
+          cname: form.name,
+          ctel: form.tel,
+          caddress: form.address
+        }
+      })
         .then(response => {
           var res = JSON.parse(response.bodyText);
           if (res.error_num === 0) {
