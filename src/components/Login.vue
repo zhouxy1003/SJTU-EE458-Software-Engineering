@@ -5,8 +5,8 @@
       <h4>我是学生</h4>
       <el-button type="text" @click="studentDialogFormVisible = true">点击注册</el-button>
       <el-dialog title="学生用户注册" :visible.sync="studentDialogFormVisible">
-        <el-form :model="studentForm">
-          <el-form-item label="用户名" :label-width="formLabelWidth">
+        <el-form ref="studentForm" :model="studentForm" :rules="studentRules">
+          <el-form-item label="用户名" prop="loginid" :label-width="formLabelWidth">
             <el-input v-model="studentForm.loginid" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="密码" :label-width="formLabelWidth">
@@ -31,10 +31,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="studentDialogFormVisible = false">取 消</el-button>
-          <el-button
-            type="primary"
-            @click="studentDialogFormVisible = false; addStudent('studentForm')"
-          >确 定</el-button>
+          <el-button type="primary" @click="addStudent('studentForm')">确 定</el-button>
         </div>
       </el-dialog>
     </el-card>
@@ -88,6 +85,9 @@ export default {
         school: "",
         major: ""
       },
+      studentRules: {
+        loginid: [{ required: true, message: "请填写用户名", trigger: "blur" }]
+      },
       companyForm: {
         loginid: "",
         password: "",
@@ -100,37 +100,47 @@ export default {
   },
   methods: {
     addStudent(form) {
-      this.$axios.get(this.HOME + '/api/add_student', {
-        params: {
-          sloginid: form.loginid,
-          spassword: form.password,
-          sname: form.name,
-          sgrade: form.grade,
-          sschool: form.school,
-          smajor: form.major
+      this.$refs[form].validate(valid => {
+        if (valid) {
+          this.$axios
+            .get(this.HOME + "/api/add_student", {
+              params: {
+                sloginid: this.studentForm.loginid,
+                spassword: this.studentForm.password,
+                sname: this.studentForm.name,
+                sgrade: this.studentForm.grade,
+                sschool: this.studentForm.school,
+                smajor: this.studentForm.major
+              }
+            })
+            .then(response => {
+              var res = JSON.parse(response.bodyText);
+              if (res.error_num === 0) {
+                this.studentDialogFormVisible = false;
+                this.$router.push("/Home");
+              } else {
+                this.$message.error("新增学生用户失败，请重试");
+                console.log(res["msg"]);
+              }
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
         }
-      })
-        .then(response => {
-          var res = JSON.parse(response.bodyText);
-          if (res.error_num === 0) {
-            this.$router.push("/Home");
-          } else {
-            this.$message.error("新增学生用户失败，请重试");
-            console.log(res["msg"]);
-          }
-        });
+      });
       //this.$router.push("/Home");
     },
     addCompany(form) {
-      this.$axios.get(this.HOME + '/api/add_student', {
-        params: {
-          cloginid: form.loginid,
-          cpassword: form.password,
-          cname: form.name,
-          ctel: form.tel,
-          caddress: form.address
-        }
-      })
+      this.$axios
+        .get(this.HOME + "/api/add_student", {
+          params: {
+            cloginid: form.loginid,
+            cpassword: form.password,
+            cname: form.name,
+            ctel: form.tel,
+            caddress: form.address
+          }
+        })
         .then(response => {
           var res = JSON.parse(response.bodyText);
           if (res.error_num === 0) {
