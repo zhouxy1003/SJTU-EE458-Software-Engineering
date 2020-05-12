@@ -66,7 +66,7 @@
         </el-menu>
       </div>
       <div>
-        <p>推荐职位</p>
+        <p>推荐宣讲会</p>
         <el-card id="firstCard"></el-card>
         <el-card></el-card>
         <el-card></el-card>
