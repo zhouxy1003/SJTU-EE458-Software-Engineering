@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card class="student_card">
-      <img src="../assets/student_login.png" class="image" />
+      <img src="../assets/student_login2.png" class="image" />
       <h4>我是学生</h4>
       <el-button type="text" @click="studentDialogFormVisible = true">点击注册</el-button>
       <el-button type="text" @click="studentDialogFormVisible2 = true">点击登录</el-button>
@@ -52,7 +52,7 @@
     </el-card>
 
     <el-card class="company_card">
-      <img src="../assets/company_login.png" class="image" />
+      <img src="../assets/company_login2.png" class="image" />
       <h4>我是企业</h4>
       <el-button type="text" @click="companyDialogFormVisible = true">点击注册</el-button>
       <el-button type="text" @click="companyDialogFormVisible2 = true">点击登录</el-button>

@@ -2,9 +2,17 @@
   <el-container direction="vertical">
     <el-row class="top-bar">
       <el-col :span="3" :offset="2">
-        <div class="pointer" @click="backToMain">
+        <div class="headText1" @click="backToMain">
           <h4>校园招聘系统</h4>
         </div>
+      </el-col>
+      <el-col :span="3">
+        <div class="headText2">
+          <h6>by 软件工程1.2组</h6>
+        </div>
+      </el-col>
+      <el-col :span="1" :offset="12">
+        <el-button id="exit" type="primary" @click="backToLogin">退出登录</el-button>
       </el-col>
     </el-row>
 
@@ -13,9 +21,6 @@
       class="menu"
       mode="horizontal"
       @select="handleSelect"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b"
       router
     >
       <el-menu-item index="/Home">首页</el-menu-item>
@@ -47,7 +52,7 @@
         </el-col>
       </el-row>
       <el-row type="flex" justify="start">
-        <p>热门搜索：AAA BBB CCC</p>
+        <p id="hotSearch">热门搜索：AAA BBB CCC</p>
       </el-row>
     </el-card>
 
@@ -118,6 +123,9 @@ export default {
     backToMain() {
       this.$router.push({ path: "/Home" });
     },
+    backToLogin() {
+      this.$router.push({ path: "/" });
+    },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     }
@@ -132,6 +140,21 @@ export default {
   a {
     color: white;
   }
+  height: 60px;
+}
+.headText1 {
+  position: relative;
+  top: -8px;
+}
+.headText2 {
+  position: relative;
+  top: -5px;
+}
+#exit {
+  position: relative;
+  top: 15px;
+  background-color: transparent;
+  border: 0;
 }
 .menu {
   padding-left: 20%;
@@ -144,7 +167,9 @@ export default {
   margin-left: 10%;
   margin-right: 10%;
 }
-
+#hotSearch {
+  font-size: 15px;
+}
 .banner {
   padding-left: 20%;
   padding-right: 20%;
