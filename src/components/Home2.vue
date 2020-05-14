@@ -52,7 +52,9 @@
         </el-col>
       </el-row>
       <el-row type="flex" justify="start">
-        <p id="hotSearch">热门搜索：AAA BBB CCC</p>
+        <div id="hotSearch">
+          <p>热门搜索：{{hotSearch.first}} {{hotSearch.second}} {{hotSearch.third}}</p>
+        </div>
       </el-row>
     </el-card>
 
@@ -99,20 +101,17 @@ export default {
       ],
       value: "职位",
       seachinput: "",
-      currentDate: "xxx",
-      activeName: "first",
       bannerimgurls: [
         require("../assets/banner1.png"),
         require("../assets/banner2.png"),
         require("../assets/banner3.png"),
         require("../assets/banner4.png")
       ],
-      firmInfoListData: null,
-      JDlistData: null,
-      name: "",
-      msg: "Welcome to Your Vue.js App",
-      input: "",
-      auth: null
+      hotSearch: {
+        first: "热门搜索1",
+        second: "热门搜索2",
+        third: "热门搜索3"
+      }
     };
   },
   mounted() {
@@ -169,6 +168,8 @@ export default {
 }
 #hotSearch {
   font-size: 15px;
+  position: relative;
+  left: 10%;
 }
 .banner {
   padding-left: 20%;

@@ -135,6 +135,13 @@
       <p id="content">实习时间：{{resume.expBegin}} 至 {{resume.expEnd}}</p>
       <p id="content">工作内容：{{resume.detail}}</p>
     </el-card>
+    <el-card class="skill">
+      <p id="title">
+        技能介绍
+      </p>
+      <el-divider></el-divider>
+      <p id="content">我的技能：{{resume.skill}}</p>
+    </el-card>
   </el-container>
 </template>
 
@@ -230,6 +237,15 @@ export default {
   padding-right: 5%;
 }
 .exp {
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.skill {
   width: 50%;
   margin-top: 20px;
   margin-bottom: 20px;

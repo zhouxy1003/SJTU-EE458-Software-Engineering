@@ -11,7 +11,12 @@
           <h6>by 软件工程1.2组</h6>
         </div>
       </el-col>
-      <el-col :span="1" :offset="12">
+      <el-col :span="2">
+        <div class="headText2">
+          <h6>Welcome: {{loginid}}</h6>
+        </div>
+      </el-col>
+      <el-col :span="1" :offset="10">
         <el-button id="exit" type="primary" @click="backToLogin">退出登录</el-button>
       </el-col>
     </el-row>
@@ -89,6 +94,19 @@ export default {
   name: "Home",
   data() {
     return {
+      loginid: this.$route.query.loginid,
+      options: [
+        {
+          value: "职位",
+          label: "职位"
+        },
+        {
+          value: "公司",
+          label: "公司"
+        }
+      ],
+      value: "职位",
+      seachinput: "",
       bannerimgurls: [
         require("../assets/banner1.png"),
         require("../assets/banner2.png"),
@@ -96,15 +114,13 @@ export default {
         require("../assets/banner4.png")
       ],
       hotSearch: {
-        first:""
+        first: "热门搜索1",
+        second: "热门搜索2",
+        third: "热门搜索3"
       }
     };
   },
-  mounted() {
-
-  },
   methods: {
-    // 返回主页
     backToMain() {
       this.$router.push({ path: "/Home" });
     },

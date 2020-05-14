@@ -7,10 +7,12 @@ import ElementUI from 'element-ui'
 // import '../theme/index.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import Axios from 'axios'
+import qs from 'qs'
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 Vue.prototype.$axios = Axios
+Vue.prototype.$qs = qs
 Vue.prototype.HOME = '/api'
 // ≈‰÷√ƒ¨»œURL
 Axios.defaults.baseURL = '/api'

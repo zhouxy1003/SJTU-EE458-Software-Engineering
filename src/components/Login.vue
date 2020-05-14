@@ -49,6 +49,18 @@
           <el-button type="primary" @click="loginStudent('studentForm2')">确 定</el-button>
         </div>
       </el-dialog>
+      <el-dialog title="请选择你的兴趣" :visible.sync="interestDialogFormVisible">
+        <el-checkbox-group v-model="checkList">
+          <el-checkbox
+            v-for="interest in interestList"
+            :label="interest.id"
+            :key="interest.id"
+          >{{interest.name}}</el-checkbox>
+        </el-checkbox-group>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="interest()">确 定</el-button>
+        </div>
+      </el-dialog>
     </el-card>
 
     <el-card class="company_card">
@@ -106,6 +118,7 @@ export default {
       companyDialogFormVisible: false,
       studentDialogFormVisible2: false,
       companyDialogFormVisible2: false,
+      interestDialogFormVisible: false,
       studentForm: {
         loginid: "",
         password: "",
@@ -152,6 +165,12 @@ export default {
         loginid: [{ required: true, message: "请填写用户名", trigger: "blur" }],
         password: [{ required: true, message: "请填写密码", trigger: "blur" }]
       },
+      interestList: [
+        { name: "互联网", id: 1 },
+        { name: "电子", id: 2 },
+        { name: "金融", id: 3 }
+      ],
+      checkList: [],
       formLabelWidth: "100px"
     };
   },
@@ -174,7 +193,6 @@ export default {
               // var res = JSON.parse(response.bodyText);
               if (response.data.error_num === 0) {
                 this.studentDialogFormVisible = false;
-                //this.$router.push("/Home");
               } else {
                 this.$message.error("新增学生用户失败，请重试");
                 console.log(res["msg"]);
@@ -185,7 +203,7 @@ export default {
           return false;
         }
       });
-      //this.$router.push("/Home");
+      this.interestDialogFormVisible = true;
     },
     addCompany(form) {
       this.$refs[form].validate(valid => {
@@ -215,13 +233,18 @@ export default {
           return false;
         }
       });
-      //this.$router.push("/Home");
     },
     loginStudent(form) {
-      this.$router.push("/Home");
+      this.$router.push({
+        path: "/Home",
+        query: { loginid: this.studentForm2.loginid }
+      });
     },
     loginCompany(form) {
-      this.$router.push("/Home");
+      this.$router.push({
+        path: "/Home",
+        query: { loginid: this.companyForm2.loginid }
+      });
     },
     resetForm(form) {
       this.$refs[form].resetFields();
@@ -229,6 +252,28 @@ export default {
       this.companyDialogFormVisible = false;
       this.studentDialogFormVisible2 = false;
       this.companyDialogFormVisible2 = false;
+    },
+    interest() {
+      console.log(this.checkList);
+      this.$axios
+        .get(this.HOME + "/api/get_init_interest", {
+          params: {
+            sloginid: this.studentForm.loginid,
+            interest: this.checkList
+          },
+          paramsSerializer: params => {
+            return this.$qs.stringify(params, { arrayFormat: "repeat" });
+          }
+        })
+        .then(response => {
+          // var res = JSON.parse(response.bodyText);
+          if (response.data.error_num === 0) {
+            this.interestDialogFormVisible = false;
+          } else {
+            this.$message.error("添加初始兴趣失败，请重试");
+            console.log(res["msg"]);
+          }
+        });
     }
   }
 };
