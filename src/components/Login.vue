@@ -46,7 +46,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="resetForm('studentForm2')">取 消</el-button>
-          <el-button type="primary" @click="loginStudent('studentForm2')">确 定</el-button>
+          <el-button type="primary" @click="loginStudent()">确 定</el-button>
         </div>
       </el-dialog>
       <el-dialog title="请选择你的兴趣" :visible.sync="interestDialogFormVisible">
@@ -102,7 +102,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="resetForm('companyForm2')">取 消</el-button>
-          <el-button type="primary" @click="loginCompany('companyForm2')">确 定</el-button>
+          <el-button type="primary" @click="loginCompany()">确 定</el-button>
         </div>
       </el-dialog>
     </el-card>
@@ -195,7 +195,7 @@ export default {
                 this.studentDialogFormVisible = false;
               } else {
                 this.$message.error("新增学生用户失败，请重试");
-                console.log(res["msg"]);
+                console.log(response.data.msg);
               }
             });
         } else {
@@ -225,7 +225,7 @@ export default {
                 //this.$router.push("/Home");
               } else {
                 this.$message.error("新增企业用户失败，请重试");
-                console.log(res["msg"]);
+                console.log(response.data.msg);
               }
             });
         } else {
@@ -234,17 +234,51 @@ export default {
         }
       });
     },
-    loginStudent(form) {
+    loginStudent() {
+      /*this.$axios
+        .get(this.HOME + "/api/student_login", {
+          params: {
+            sloginid: this.studentForm2.loginid,
+            spassword: this.studentForm2.password
+          }
+        })
+        .then(response => {
+          // var res = JSON.parse(response.bodyText);
+          if (response.data.error_num === 0) {
+            this.Global.loginid = this.studentForm2.loginid;
+            this.$router.push({
+              path: "/Home"
+            });
+          } else {
+            this.$message.error("密码错误，请重试");
+            console.log(response.data.msg);
+          }
+        });*/
+      this.Global.loginid = this.studentForm2.loginid;
       this.$router.push({
-        path: "/Home",
-        query: { loginid: this.studentForm2.loginid }
+        path: "/Home"
       });
     },
-    loginCompany(form) {
-      this.$router.push({
-        path: "/Home",
-        query: { loginid: this.companyForm2.loginid }
-      });
+    loginCompany() {
+      this.$axios
+        .get(this.HOME + "/api/company_login", {
+          params: {
+            cloginid: this.companyForm2.loginid,
+            cpassword: this.companyForm2.password
+          }
+        })
+        .then(response => {
+          // var res = JSON.parse(response.bodyText);
+          if (response.data.error_num === 0) {
+            this.Global.loginid = this.companyForm2.loginid;
+            this.$router.push({
+              path: "/Home"
+            });
+          } else {
+            this.$message.error("密码错误，请重试");
+            console.log(response.data.msg);
+          }
+        });
     },
     resetForm(form) {
       this.$refs[form].resetFields();
@@ -271,7 +305,7 @@ export default {
             this.interestDialogFormVisible = false;
           } else {
             this.$message.error("添加初始兴趣失败，请重试");
-            console.log(res["msg"]);
+            console.log(response.data.msg);
           }
         });
     }

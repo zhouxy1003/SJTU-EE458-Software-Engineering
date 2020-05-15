@@ -8,12 +8,14 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Axios from 'axios'
 import qs from 'qs'
+import Global from './global.js'
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 Vue.prototype.$axios = Axios
 Vue.prototype.$qs = qs
 Vue.prototype.HOME = '/api'
+Vue.prototype.Global = Global
 // ≈‰÷√ƒ¨»œURL
 Axios.defaults.baseURL = '/api'
 Axios.headers = {'Content-Type': 'application/json'}

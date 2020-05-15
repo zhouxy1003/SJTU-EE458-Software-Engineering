@@ -2,7 +2,7 @@
   <el-container direction="vertical">
     <el-row class="top-bar">
       <el-col :span="3" :offset="2">
-        <div class="headText1" @click="backToMain">
+        <div class="headText1" @click="backToMain()">
           <h4>校园招聘系统</h4>
         </div>
       </el-col>
@@ -13,11 +13,11 @@
       </el-col>
       <el-col :span="2">
         <div class="headText2">
-          <h6>Welcome: {{loginid}}</h6>
+          <h6>Welcome: {{this.Global.loginid}}</h6>
         </div>
       </el-col>
       <el-col :span="1" :offset="10">
-        <el-button id="exit" type="primary" @click="backToLogin">退出登录</el-button>
+        <el-button id="exit" type="primary" @click="backToLogin()">退出登录</el-button>
       </el-col>
     </el-row>
 
@@ -53,7 +53,7 @@
           </el-select>
         </el-col>
         <el-col :span="3">
-          <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
+          <el-button type="primary" icon="el-icon-search" @click="search()">搜索</el-button>
         </el-col>
       </el-row>
       <el-row type="flex" justify="start">
@@ -94,19 +94,18 @@ export default {
   name: "Home",
   data() {
     return {
-      loginid: this.$route.query.loginid,
       options: [
         {
           value: "职位",
           label: "职位"
         },
         {
-          value: "公司",
-          label: "公司"
+          value: "宣讲会",
+          label: "宣讲会"
         }
       ],
       value: "职位",
-      seachinput: "",
+      searchinput: "",
       bannerimgurls: [
         require("../assets/banner1.png"),
         require("../assets/banner2.png"),
@@ -120,11 +119,26 @@ export default {
       }
     };
   },
+  created() {},
   methods: {
+    search() {
+      if (this.value == "职位") {
+        this.$router.push({
+          path: "/Search",
+          query: { searchinput: this.searchinput }
+        });
+      } else if (this.value == "宣讲会") {
+        this.$router.push({
+          path: "/Search2",
+          query: { searchinput: this.searchinput }
+        });
+      }
+    },
     backToMain() {
       this.$router.push({ path: "/Home" });
     },
     backToLogin() {
+      this.Global.loginid = "";
       this.$router.push({ path: "/" });
     },
     handleSelect(key, keyPath) {
@@ -200,13 +214,6 @@ img {
 .recommend {
   padding-left: 20%;
   padding-right: 20%;
-}
-
-.el-footer {
-  text-align: left;
-  font-size: 12px;
-  background: #446699;
-  color: white;
 }
 
 .el-card {

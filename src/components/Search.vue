@@ -11,12 +11,12 @@
           <h6>by 软件工程1.2组</h6>
         </div>
       </el-col>
-       <el-col :span="2">
+      <el-col :span="2">
         <div class="headText2">
           <h6>Welcome: {{this.Global.loginid}}</h6>
         </div>
       </el-col>
-      <el-col :span="1" :offset="12">
+      <el-col :span="1" :offset="10">
         <el-button id="exit" type="primary" @click="backToLogin()">退出登录</el-button>
       </el-col>
     </el-row>
@@ -53,7 +53,7 @@
           </el-select>
         </el-col>
         <el-col :span="3">
-          <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
+          <el-button type="primary" icon="el-icon-search" @click="search(searchinput)">搜索</el-button>
         </el-col>
       </el-row>
       <el-row type="flex" justify="start">
@@ -63,67 +63,111 @@
       </el-row>
     </el-card>
 
-    <div class="banner">
-      <el-carousel :interval="4000" type="card" height="200px" trigger="click">
-        <el-carousel-item v-for="pic in bannerimgurls" :key="pic">
-          <img :src="pic" />
-        </el-carousel-item>
-      </el-carousel>
+    <div v-if="searchData.length>0">
+      <el-card class="searchResult" v-for="(job, index) in searchData" :key="index">
+        <el-link type="primary">{{job.jname}}</el-link>
+        <p>
+          <span>{{job.salary}}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>{{job.jplace}}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>{{job.cname}}</span>
+        </p>
+      </el-card>
     </div>
-    <el-main>
-      <div class="recommend">
-        <el-menu :default-active="$route.path" mode="horizontal" @select="handleSelect" router>
-          <el-menu-item index="/Home">推荐职位</el-menu-item>
-          <el-menu-item index="/Home2">推荐宣讲会</el-menu-item>
-        </el-menu>
-      </div>
-      <div>
-        <p>推荐宣讲会</p>
-        <el-card id="firstCard"></el-card>
-        <el-card></el-card>
-        <el-card></el-card>
-        <el-card></el-card>
-        <el-card></el-card>
-      </div>
-    </el-main>
   </el-container>
 </template>
 
 <script>
 export default {
-  name: "Home2",
+  name: "Search",
   data() {
     return {
       options: [
         {
           value: "职位",
-          label: "宣讲会"
+          label: "职位"
         },
         {
-          value: "公司",
+          value: "宣讲会",
           label: "宣讲会"
         }
       ],
-      value: "宣讲会",
+      value: "职位",
       searchinput: "",
-      bannerimgurls: [
-        require("../assets/banner1.png"),
-        require("../assets/banner2.png"),
-        require("../assets/banner3.png"),
-        require("../assets/banner4.png")
-      ],
       hotSearch: {
         first: "热门搜索1",
         second: "热门搜索2",
         third: "热门搜索3"
-      }
+      },
+      jobList: [
+        {
+          jname: "C++研发实习生",
+          salary: "300-400元/天",
+          jplace: "北京",
+          cname: "北京蓦然认知科技有限公司"
+        },
+        {
+          jname: "后端研发实习生",
+          salary: "250-300元/天",
+          jplace: "杭州",
+          cname: "杭州艾耕科技有限公司"
+        },
+        {
+          jname: "阿里健康java实习生",
+          salary: "250-300元/天",
+          jplace: "北京",
+          cname: "阿里健康"
+        },
+        {
+          jname: "大数据开发实习生",
+          salary: "150-200元/天",
+          jplace: "上海",
+          cname: "上海比孚信息科技有限公司"
+        }
+      ], // 原本数据
+      searchData: [] // 搜索结果
     };
   },
-  mounted() {
-
+  created() {
+    this.searchinput = this.$route.query.searchinput;
+    //getJobList();
+    this.search(this.searchinput);
   },
   methods: {
-    // 返回主页
+    getJobList() {
+      this.$axios
+        .get(this.HOME + "/api/get_job", {
+          params: {}
+        })
+        .then(response => {
+          this.jobList = response.data;
+        });
+    },
+    search(str) {
+      if (this.value == "职位") {
+        this.searchJob(str);
+      } else if (this.value == "宣讲会") {
+        this.$router.push({
+          path: "/Search2",
+          query: { searchinput: this.searchinput }
+        });
+      }
+    },
+    searchJob(str) {
+      if (str) {
+        this.searchData = this.jobList.filter(function(job) {
+          return Object.keys(job).some(function(key) {
+            // 每一项数据的参数名
+            return (
+              String(job[key])
+                .toLowerCase() // 字符串转换小写
+                .indexOf(str) > -1 // 返回某个指定的字符串值在字符串中首次出现的位置
+            );
+          });
+        });
+      }
+    },
     backToMain() {
       this.$router.push({ path: "/Home" });
     },
@@ -172,39 +216,29 @@ export default {
   margin-left: 10%;
   margin-right: 10%;
 }
+.searchResult {
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-size: 15px;
+}
+.el-link {
+  font-size: 18px;
+}
 #hotSearch {
   font-size: 15px;
   position: relative;
   left: 10%;
 }
-.banner {
-  padding-left: 20%;
-  padding-right: 20%;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 200px;
-  margin: 0;
-}
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
-
-img {
-  width: 100%;
-}
-
 .recommend {
   padding-left: 20%;
   padding-right: 20%;
 }
+
 .el-card {
   margin-top: 20px;
   margin-bottom: 20px;

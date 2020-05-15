@@ -5,6 +5,8 @@ import Login from '@/components/Login'
 import Home from '@/components/Home'
 import Home2 from '@/components/Home2'
 import Resume from '@/components/Resume'
+import Search from '@/components/Search'
+import Search2 from '@/components/Search2'
 
 Vue.use(Router)
 Vue.use(VueResource)
@@ -31,5 +33,15 @@ export default new Router({
       name: 'Resume',
       component: Resume
     },
+    {
+      path: '/Search',
+      name: 'Search',
+      component: Search
+    },
+    {
+      path: '/Search2',
+      name: 'Search2',
+      component: Search2
+    }
   ]
 })
