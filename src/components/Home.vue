@@ -32,8 +32,8 @@
       <el-menu-item index="/Resume">简历管理</el-menu-item>
       <el-submenu index="3">
         <template slot="title">我的</template>
-        <el-menu-item index="3-1">我投递的职位</el-menu-item>
-        <el-menu-item index="3-2">我报名的宣讲会</el-menu-item>
+        <el-menu-item index="/MyJob">我投递的职位</el-menu-item>
+        <el-menu-item index="/MyTalk">我报名的宣讲会</el-menu-item>
       </el-submenu>
     </el-menu>
 
@@ -77,13 +77,17 @@
           <el-menu-item index="/Home2">推荐宣讲会</el-menu-item>
         </el-menu>
       </div>
-      <div>
-        <p>推荐职位</p>
-        <el-card id="firstCard"></el-card>
-        <el-card></el-card>
-        <el-card></el-card>
-        <el-card></el-card>
-        <el-card></el-card>
+      <div v-if="jobList.length>0">
+        <el-card class="searchResult" v-for="(job, index) in jobList" :key="index">
+          <el-link type="primary">{{job.jname}}</el-link>
+          <p>
+            <span>{{job.salary}}</span>
+            <el-divider direction="vertical"></el-divider>
+            <span>{{job.jplace}}</span>
+            <el-divider direction="vertical"></el-divider>
+            <span>{{job.cname}}</span>
+          </p>
+        </el-card>
       </div>
     </el-main>
   </el-container>
@@ -116,10 +120,38 @@ export default {
         first: "热门搜索1",
         second: "热门搜索2",
         third: "热门搜索3"
-      }
+      },
+      jobList: [
+        {
+          jname: "C++研发实习生",
+          salary: "300-400元/天",
+          jplace: "北京",
+          cname: "北京蓦然认知科技有限公司"
+        },
+        {
+          jname: "后端研发实习生",
+          salary: "250-300元/天",
+          jplace: "杭州",
+          cname: "杭州艾耕科技有限公司"
+        },
+        {
+          jname: "阿里健康java实习生",
+          salary: "250-300元/天",
+          jplace: "北京",
+          cname: "阿里健康"
+        },
+        {
+          jname: "大数据开发实习生",
+          salary: "150-200元/天",
+          jplace: "上海",
+          cname: "上海比孚信息科技有限公司"
+        }
+      ] // 推荐数据
     };
   },
-  created() {},
+  created() {
+    this.recommendJob();
+  },
   methods: {
     search() {
       if (this.value == "职位") {
@@ -133,6 +165,17 @@ export default {
           query: { searchinput: this.searchinput }
         });
       }
+    },
+    recommendJob() {
+      this.$axios
+        .get(this.HOME + "/api/get_recommend_job", {
+          params: {
+            sloginid: this.Global.loginid
+          }
+        })
+        .then(response => {
+          this.jobList = response.data;
+        });
     },
     backToMain() {
       this.$router.push({ path: "/Home" });
@@ -215,7 +258,19 @@ img {
   padding-left: 20%;
   padding-right: 20%;
 }
-
+.searchResult {
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-size: 15px;
+}
+.el-link {
+  font-size: 18px;
+}
 .el-card {
   margin-top: 20px;
   margin-bottom: 20px;

@@ -32,8 +32,8 @@
       <el-menu-item index="/Resume">简历管理</el-menu-item>
       <el-submenu index="3">
         <template slot="title">我的</template>
-        <el-menu-item index="3-1">我投递的职位</el-menu-item>
-        <el-menu-item index="3-2">我报名的宣讲会</el-menu-item>
+        <el-menu-item index="/MyJob">我投递的职位</el-menu-item>
+        <el-menu-item index="/MyTalk">我报名的宣讲会</el-menu-item>
       </el-submenu>
     </el-menu>
 

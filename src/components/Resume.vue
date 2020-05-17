@@ -32,12 +32,16 @@
       <el-menu-item index="/Resume">简历管理</el-menu-item>
       <el-submenu index="3">
         <template slot="title">我的</template>
-        <el-menu-item index="3-1">我投递的职位</el-menu-item>
-        <el-menu-item index="3-2">我报名的宣讲会</el-menu-item>
+        <el-menu-item index="/MyJob">我投递的职位</el-menu-item>
+        <el-menu-item index="/MyTalk">我报名的宣讲会</el-menu-item>
       </el-submenu>
     </el-menu>
-
-    <el-button type="text" icon="el-icon-edit" @click="resumeDialogFormVisible = true"></el-button>
+    <el-button
+      id="editButton"
+      type="text"
+      icon="el-icon-edit"
+      @click="resumeDialogFormVisible = true"
+    >编辑简历</el-button>
     <el-dialog title="我的简历" :visible.sync="resumeDialogFormVisible">
       <el-form ref="resume" :model="resume">
         <el-form-item label="手机" :label-width="formLabelWidth">
@@ -349,6 +353,11 @@ export default {
   font-size: 20px;
 }
 #content {
+  font-size: 15px;
+}
+#editButton {
+  position: relative;
+  top: 10px;
   font-size: 15px;
 }
 </style>
