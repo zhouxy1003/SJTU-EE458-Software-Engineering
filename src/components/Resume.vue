@@ -182,7 +182,7 @@ export default {
     };
   },
   created() {
-    showResume();
+    this.showResume();
   },
   methods: {
     addResume() {
@@ -213,9 +213,9 @@ export default {
           // var res = JSON.parse(response.bodyText);
           if (response.data.error_num === 0) {
             this.resumeDialogFormVisible = false;
-            showResume();
+            this.showResume();
           } else {
-            this.$message.error("简历加载失败，请重试");
+            this.$message.error("简历添加失败，请重试");
             console.log(response.data.msg);
           }
         });
