@@ -18,9 +18,9 @@
           </el-form-item>
           <el-form-item label="年级" prop="grade" :label-width="formLabelWidth">
             <el-select v-model="studentForm.grade" placeholder="请选择年级">
-              <el-option label="本科" value="1"></el-option>
-              <el-option label="硕士" value="2"></el-option>
-              <el-option label="博士" value="3"></el-option>
+              <el-option label="本科" value="本科"></el-option>
+              <el-option label="硕士" value="硕士"></el-option>
+              <el-option label="博士" value="博士"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="学校" prop="school" :label-width="formLabelWidth">
@@ -94,10 +94,10 @@
       <el-dialog title="企业用户登录" :visible.sync="companyDialogFormVisible2">
         <el-form ref="companyForm2" :model="companyForm2" :rules="companyRules2">
           <el-form-item label="用户名" prop="loginid" :label-width="formLabelWidth">
-            <el-input v-model="companyForm.loginid" autocomplete="off"></el-input>
+            <el-input v-model="companyForm2.loginid" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password" :label-width="formLabelWidth">
-            <el-input v-model="companyForm.password" autocomplete="off"></el-input>
+            <el-input v-model="companyForm2.password" autocomplete="off"></el-input>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -168,7 +168,20 @@ export default {
       interestList: [
         { name: "互联网", id: 1 },
         { name: "电子", id: 2 },
-        { name: "金融", id: 3 }
+        { name: "金融", id: 3 },
+        { name: "销售", id: 4 },
+        { name: "人事", id: 5 },
+        { name: "餐饮", id: 6 },
+        { name: "旅游", id: 7 },
+        { name: "健身", id: 8 },
+        { name: "房产中介", id: 9 },
+        { name: "家政", id: 10 },
+        { name: "交通服务", id: 11 },
+        { name: "法律", id: 12 },
+        { name: "编辑", id: 13 },
+        { name: "医疗", id: 14 },
+        { name: "服装", id: 15 },
+        { name: "制药", id: 16 },
       ],
       checkList: [],
       formLabelWidth: "100px"
@@ -272,7 +285,7 @@ export default {
       //     if (response.data.error_num === 0) {
       //       this.Global.loginid = this.companyForm2.loginid;
       //       this.$router.push({
-      //         path: "/Company"
+      //         path: "/Enterprice"
       //       });
       //     } else {
       //       this.$message.error("密码错误，请重试");
@@ -281,7 +294,7 @@ export default {
       //   });
       this.Global.loginid = this.companyForm2.loginid;
       this.$router.push({
-        path: "/Company"
+        path: "/Enterprice"
       });
     },
     resetForm(form) {

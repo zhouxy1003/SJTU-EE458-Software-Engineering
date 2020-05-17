@@ -37,7 +37,7 @@
           <template slot="title">
             <i class="el-icon-setting"></i>资料完善
           </template>
-          <el-menu-item index="/Personal">个人信息</el-menu-item>
+          <el-menu-item index="/Enterprice">个人信息</el-menu-item>
           <el-menu-item index="/Company">公司信息</el-menu-item>
         </el-submenu>
 
@@ -143,7 +143,7 @@ export default {
         ]
       },
       created() {
-        showcompanyForm();
+        this.showcompanyForm();
       },
       formLabelWidth: "100px"
     };
@@ -155,10 +155,9 @@ export default {
         .get(this.HOME + "/api/add_companyForm", {
           params: {
             //等待api接口
-            sname: this.companyForm.cname,
-            tel: this.companyForm.place,
-            email: this.companyForm.scale,
-
+            cname: this.companyForm.cname,
+            place: this.companyForm.place,
+            scale: this.companyForm.scale,
             industry: this.companyForm.industry
           }
         })
@@ -166,7 +165,7 @@ export default {
           // var res = JSON.parse(response.bodyText);
           if (response.data.error_num === 0) {
             this.resumeDialogFormVisible = false;
-            showcompanyForm();
+            this.showcompanyForm();
           } else {
             this.$message.error("公司资料加载失败，请重试");
             console.log(response.data.msg);
