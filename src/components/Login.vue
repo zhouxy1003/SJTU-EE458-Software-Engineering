@@ -235,7 +235,6 @@ export default {
               // var res = JSON.parse(response.bodyText);
               if (response.data.error_num === 0) {
                 this.companyDialogFormVisible = false;
-                //this.$router.push("/Home");
               } else {
                 this.$message.error("新增企业用户失败，请重试");
                 console.log(response.data.msg);
@@ -260,7 +259,7 @@ export default {
       //     if (response.data.error_num === 0) {
       //       this.Global.loginid = this.studentForm2.loginid;
       //       this.$router.push({
-      //         path: "/Home"
+      //         path: "/Student/Home"
       //       });
       //     } else {
       //       this.$message.error("密码错误，请重试");
@@ -269,7 +268,7 @@ export default {
       //   });
       this.Global.loginid = this.studentForm2.loginid;
       this.$router.push({
-        path: "/Home"
+        path: "/Student/Home"
       });
     },
     loginCompany() {
@@ -285,7 +284,7 @@ export default {
       //     if (response.data.error_num === 0) {
       //       this.Global.loginid = this.companyForm2.loginid;
       //       this.$router.push({
-      //         path: "/Enterprice"
+      //         path: "/Company/Enterprice"
       //       });
       //     } else {
       //       this.$message.error("密码错误，请重试");
@@ -294,7 +293,7 @@ export default {
       //   });
       this.Global.loginid = this.companyForm2.loginid;
       this.$router.push({
-        path: "/Enterprice"
+        path: "/Company/Enterprice"
       });
     },
     resetForm(form) {

@@ -28,12 +28,12 @@
       @select="handleSelect"
       router
     >
-      <el-menu-item index="/Home">首页</el-menu-item>
-      <el-menu-item index="/Resume">简历管理</el-menu-item>
+      <el-menu-item index="/Student/Home">首页</el-menu-item>
+      <el-menu-item index="/Student/Resume">简历管理</el-menu-item>
       <el-submenu index="3">
         <template slot="title">我的</template>
-        <el-menu-item index="/MyJob">我投递的职位</el-menu-item>
-        <el-menu-item index="/MyTalk">我报名的宣讲会</el-menu-item>
+        <el-menu-item index="/Student/MyJob">我投递的职位</el-menu-item>
+        <el-menu-item index="/Student/MyTalk">我报名的宣讲会</el-menu-item>
       </el-submenu>
     </el-menu>
     <el-button
@@ -163,7 +163,7 @@ export default {
   name: "Resume",
   data() {
     return {
-      activeIndex: "/Resume",
+      activeIndex: "/Student/Resume",
       resumeDialogFormVisible: false,
       resume: {
         sname: "",
@@ -266,7 +266,7 @@ export default {
     },
     // 返回主页
     backToMain() {
-      this.$router.push({ path: "/Home" });
+      this.$router.push({ path: "/Student/Home" });
     },
     backToLogin() {
       this.Global.loginid = "";

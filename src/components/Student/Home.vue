@@ -28,12 +28,12 @@
       @select="handleSelect"
       router
     >
-      <el-menu-item index="/Home">首页</el-menu-item>
-      <el-menu-item index="/Resume">简历管理</el-menu-item>
+      <el-menu-item index="/Student/Home">首页</el-menu-item>
+      <el-menu-item index="/Student/Resume">简历管理</el-menu-item>
       <el-submenu index="3">
         <template slot="title">我的</template>
-        <el-menu-item index="/MyJob">我投递的职位</el-menu-item>
-        <el-menu-item index="/MyTalk">我报名的宣讲会</el-menu-item>
+        <el-menu-item index="/Student/MyJob">我投递的职位</el-menu-item>
+        <el-menu-item index="/Student/MyTalk">我报名的宣讲会</el-menu-item>
       </el-submenu>
     </el-menu>
 
@@ -73,13 +73,13 @@
     <el-main>
       <div class="recommend">
         <el-menu :default-active="$route.path" mode="horizontal" @select="handleSelect" router>
-          <el-menu-item index="/Home">推荐职位</el-menu-item>
-          <el-menu-item index="/Home2">推荐宣讲会</el-menu-item>
+          <el-menu-item index="/Student/Home">推荐职位</el-menu-item>
+          <el-menu-item index="/Student/Home2">推荐宣讲会</el-menu-item>
         </el-menu>
       </div>
       <div v-if="jobList.length>0">
         <el-card class="searchResult" v-for="(job, index) in jobList" :key="index">
-          <el-link type="primary">{{job.jname}}</el-link>
+          <el-link type="primary" @click="jobDetail(job.jobid)">{{job.jname}}</el-link>
           <p>
             <span>{{job.salary}}</span>
             <el-divider direction="vertical"></el-divider>
@@ -111,10 +111,10 @@ export default {
       value: "职位",
       searchinput: "",
       bannerimgurls: [
-        require("../assets/banner1.png"),
-        require("../assets/banner2.png"),
-        require("../assets/banner3.png"),
-        require("../assets/banner4.png")
+        require("../../assets/banner1.png"),
+        require("../../assets/banner2.png"),
+        require("../../assets/banner3.png"),
+        require("../../assets/banner4.png")
       ],
       hotSearch: {
         first: "热门搜索1",
@@ -123,24 +123,28 @@ export default {
       },
       jobList: [
         {
+          jobid: "1",
           jname: "C++研发实习生",
           salary: "300-400元/天",
           jplace: "北京",
           cname: "北京蓦然认知科技有限公司"
         },
         {
+          jobid: "2",
           jname: "后端研发实习生",
           salary: "250-300元/天",
           jplace: "杭州",
           cname: "杭州艾耕科技有限公司"
         },
         {
+          jobid: "3",
           jname: "阿里健康java实习生",
           salary: "250-300元/天",
           jplace: "北京",
           cname: "阿里健康"
         },
         {
+          jobid: "4",
           jname: "大数据开发实习生",
           salary: "150-200元/天",
           jplace: "上海",
@@ -156,12 +160,12 @@ export default {
     search() {
       if (this.value == "职位") {
         this.$router.push({
-          path: "/Search",
+          path: "/Student/Search",
           query: { searchinput: this.searchinput }
         });
       } else if (this.value == "宣讲会") {
         this.$router.push({
-          path: "/Search2",
+          path: "/Student/Search2",
           query: { searchinput: this.searchinput }
         });
       }
@@ -177,8 +181,14 @@ export default {
           this.jobList = response.data;
         });
     },
+    jobDetail(id) {
+      this.$router.push({
+        path: "/Student/JobDetail",
+        query: { jobid: id }
+      });
+    },
     backToMain() {
-      this.$router.push({ path: "/Home" });
+      this.$router.push({ path: "/Student/Home" });
     },
     backToLogin() {
       this.Global.loginid = "";

@@ -2,6 +2,7 @@
   <div>
     <el-container direction="vertical">
     <el-row class="top-bar">
+      <img src="../../assets/ijob.png" class="image" />
       <el-col :span="3" :offset="2">
         <div class="headText1" @click="backToMain">
           <h4>校园招聘系统</h4>
@@ -32,71 +33,60 @@
         text-color="#fff"
         active-text-color="#ffd04b"
         router>   
-      <el-submenu index="1" >
-        <template slot="title"><i class="el-icon-setting"></i>资料完善</template>
-        <el-menu-item index="/Enterprice">个人信息</el-menu-item>
-        <el-menu-item index="/Company">公司信息</el-menu-item>
-      </el-submenu> 
+  <el-menu-item index="/Company/Enterprice" class="el-icon-setting">资料完善</el-menu-item>
+       
        
       <el-submenu index="2" >
         <template slot="title"><i class="el-icon-location"></i>职位管理</template>
-        <el-menu-item index="/NewPos">发布职位</el-menu-item>
-        <el-menu-item index="2-2">管理职位</el-menu-item>
+        <el-menu-item index="/Company/NewPos">发布职位</el-menu-item>
+        <el-menu-item index="/Company/ManPos">管理职位</el-menu-item>
       </el-submenu>
       <el-submenu index="3" >
         
         <template slot="title">
           <i class="el-icon-menu"></i>宣讲会管理</template>
         
-        <el-menu-item index="/NewTalk">发布宣讲会</el-menu-item>
-        <el-menu-item index="3-2">管理宣讲会</el-menu-item>
+        <el-menu-item index="/Company/NewTalk">发布宣讲会</el-menu-item>
+        <el-menu-item index="/Company/ManTalk">管理宣讲会</el-menu-item>
       </el-submenu>
-      <el-submenu index="4" >
-        <template slot="title" class="el-icon-document"><i class="el-icon-document"></i>简历管理</template>
-        <el-menu-item index="4-1">简历收件箱</el-menu-item>
-        <el-menu-item index="4-2">已处理简历</el-menu-item>
-        <el-menu-item index="4-3">面试管理</el-menu-item>
-        <el-submenu index="4-4">
-          <template slot="title">简历库</template>
-          <el-menu-item index="4-4-1">搜索简历</el-menu-item>
-          <el-menu-item index="4-4-2">已邀请简历</el-menu-item>
-        </el-submenu>
-      </el-submenu>   
+       <el-menu-item index="/Company/ResSer" class="el-icon-document">简历库</el-menu-item>
 
     </el-menu>
      <el-col class="line" :span="2">-</el-col>
+     <el-card class="talk">
     <el-form :model="talkForm" :rules="rules" ref="talkForm" label-width="100px" class="demo-talkForm">
       
-      <el-form-item label="宣讲会名称" prop="name">
-        <el-col :span="11">
-        <el-input v-model="talkForm.name"></el-input>
+      <el-form-item label="宣讲会名称" prop="xname">
+        <el-col :span="9">
+        <el-input v-model="talkForm.xname"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="宣讲会校区" prop="region">
-        <el-col :span="11">
-        <el-select v-model="talkForm.region" placeholder="请选择宣讲会校区">
-          <el-option label="上海交通大学徐汇校区" value="徐汇校区"></el-option>
-          <el-option label="上海交通大学闵行校区" value="闵行校区"></el-option>
-        </el-select>
-        </el-col>
-        
-        <el-col class="line" :span="2">-</el-col>
+          <el-col :span="9">
+            <el-select v-model="talkForm.region" placeholder="请选择宣讲会校区">
+              <el-option label="上海交通大学徐汇校区" value="徐汇校区"></el-option>
+              <el-option label="上海交通大学闵行校区" value="闵行校区"></el-option>
+            </el-select>
+          </el-col>
+      </el-form-item> 
+        <!-- <el-col class="line" :span="2"></el-col> -->
       
-        <el-col :span="11">
-      <el-form-item label="具体地址" prop="address" class="address">
-          <el-input type="textarea" v-model="talkForm.address"></el-input>
-        </el-form-item>
-        </el-col>
+      
+          
+      <el-form-item label="具体地址" prop="xaddress">
+          <el-col :span="9"> 
+            <el-input type="textarea" v-model="talkForm.xaddress"></el-input>
+          </el-col>
       </el-form-item>
       <el-form-item label="宣讲会时间" required>
-        <el-col :span="11">
+        <el-col :span="9">
           <el-form-item prop="date">
             <el-date-picker type="date" placeholder="选择日期" v-model="talkForm.date" style="width: 100%;" ></el-date-picker>
           </el-form-item>
         </el-col>
         <el-col class="line" :span="2">-</el-col>
-        <el-col :span="11">
-          <el-form-item prop="date2">
+        <el-col :span="9">
+          <el-form-item prop="time">
              <el-time-picker
                 is-range
                 v-model="talkForm.time"
@@ -107,30 +97,14 @@
                 format="HH:mm">
               </el-time-picker>
            
-            <!-- <el-time-picker
-            v-model="talkForm.expBegin"
-            type="time"
-            placeholder="选择时间"
-            value-format="HH:mm" 
-            format="HH:mm"
-            ></el-time-picker>
-          <el-time-picker
-            v-model="talkForm.expEnd"
-            type="time"
-            placeholder="选择时间"
-            value-format="HH:mm"
-            format="HH:mm"
-          >></el-time-picker> -->
-            <!-- <el-time-picker placeholder="选择时间" v-model="talkForm.date2" style="width: 100%;"></el-time-picker> -->
+          
           </el-form-item>
         </el-col>
       </el-form-item>
 
        
-      <!-- <el-form-item label="即时配送" prop="delivery">
-        <el-switch v-model="talkForm.delivery"></el-switch>
-      </el-form-item> -->
-      <el-form-item label="宣讲主题" prop="type">
+     
+      <el-form-item label="宣讲主题" prop="theme">
         <el-checkbox-group v-model="talkForm.type">
           <el-checkbox label="人工智能" name="type"></el-checkbox>
           <el-checkbox label="金融经济" name="type"></el-checkbox>
@@ -146,8 +120,8 @@
         </el-checkbox-group>
       </el-form-item>
       
-      <el-form-item label="活动内容" prop="context">
-        <el-input type="textarea" v-model="talkForm.context"></el-input>
+      <el-form-item label="活动内容" prop="xcontext">
+        <el-input type="textarea" v-model="talkForm.xcontext"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('talkForm')">立即创建</el-button>
@@ -157,7 +131,7 @@
 
   
 
-      
+    </el-card>
      
    </el-container> 
   </div>
@@ -171,7 +145,7 @@ export default {
        
         
         talkForm: {
-          name: '',
+          xname: '',
           region: '',
           date: '',
           time:"__________",
@@ -182,10 +156,10 @@ export default {
           expBegin: "__________",
           expEnd: "__________",
           
-          context: ''
+          xcontext: ''
         },
         rules: {
-          name: [
+          xname: [
             { required: true, message: '请输入宣讲会名称', trigger: 'blur' },
             { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
           ],
@@ -196,38 +170,96 @@ export default {
             { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
           ],
           
-          type: [
-            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+          theme: [
+            { type: 'theme', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
           ],
           // activity: [
           //   { type: 'array', required: false,  trigger: 'change' }
           // ],
-          context: [
+          xcontext: [
             { required: true, message: '请填写活动内容', trigger: 'blur' }
           ],
-          address: [
+          xaddress: [
             { required: true, message: '请填写宣讲会具体举办地点', trigger: 'blur' }
           ]
-        }
+        },
+        formLabelWidth: "100px"
       };
     },
+    created(){
+      this.showtalkForm();
+    },
     methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
+      addtalkForm(){
+        this.$axios
+        .get(this.HOME+'/api/add_talkForm',{
+          params:{
+            xname:this.talkForm.xname,
+            region:this.talkForm.region,
+            xaddress:this.talkForm.xaddress,
+            date:this.talkForm.date,
+            time:this.talkForm.time,
+            theme:this.talkForm.theme,
+            activity:this.talkForm.activity,
+            content:this.talkForm.xcontext,
+            
+          }
+        })
+        .then(responese =>{
+          if(responese.data.error_num === 0){
+            this.showtalkForm();
+          }else{
+            this.$message.error("职位发布失败，请重试")
+            console.log(responese.data.msg);
           }
         });
       },
+      showtalkForm(){
+        this.$axios
+        .get(this.HOME+'api/show_talkForm',{
+          params:{
+            //宣讲会id？？？不清楚
+            talkid:this.Global.talkid
+          }
+        })
+        .then(responese=>{
+          if(responese.data.error_num === 0){
+            
+           
+            this.talkForm.xname = responese.data.xname;
+            this.talkForm.region = responese.data.region;
+            this.talkForm.xaddress = responese.data.xaddress;
+            this.talkForm.date = responese.data.date;
+            this.talkForm.time = responese.data.time
+            this.talkForm.theme = responese.data.theme;
+            this.talkForm.activity = responese.data.activity;
+            this.talkForm.xcontext =responese.data.xcontext;
+            
+          }
+          else{
+            this.$message.error("宣讲会加载失败，请重试")
+            console.log(responese.data.msg)
+          }
+
+        });
+      },
+
+      // submitForm(formName) {
+      //   this.$refs[formName].validate((valid) => {
+      //     if (valid) {
+      //       alert('submit!');
+      //     } else {
+      //       console.log('error submit!!');
+      //       return false;
+      //     }
+        // });
+      //},
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
         // 返回主页
       backToMain() {
-        this.$router.push({ path: "/Home" });
+        this.$router.push({ path: "/Company/Enterprice" });
       },
       backToLogin() {
         this.$router.push({ path: "/" });
@@ -242,7 +274,8 @@ export default {
         console.log(key, keyPath);
     }
     }
-  }
+}
+  
 
     
     
@@ -253,7 +286,7 @@ export default {
 
 <style lang="scss" scoped>
 .top-bar {
-  background: #446699;
+  background: #646e77;
   color: white;
   a {
     color: white;
@@ -302,7 +335,24 @@ export default {
   padding-left:-5px;
   padding-right: 6%;
 }
-.address{
+.image {
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  left: 10px;
+  top: 10px;
+  display: block;
+}
+.talk{
+    width: 50%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.xaddress{
   position: relative;
   margin-top: 0px;
   //margin-bottom: 500px;
@@ -322,5 +372,6 @@ export default {
 #content {
   font-size: 15px;
 }
+
 
 </style>

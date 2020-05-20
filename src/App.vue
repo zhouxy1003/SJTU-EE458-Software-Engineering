@@ -19,9 +19,13 @@ export default {
           jsonPath:
             "/static/live2dw/live2d-widget-model-koharu/assets/koharu.model.json"
         },
-        display: { position: "left", width: 150, height: 300 },
+        display: { position: "right", width: 150, height: 300 },
         mobile: { show: true },
-        log: false
+        log: false,
+        dialog: {
+          enable: true,
+          hitokoto: false
+        }
       });
     }, 1000);
   }

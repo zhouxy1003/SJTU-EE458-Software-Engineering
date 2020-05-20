@@ -28,81 +28,75 @@
       @select="handleSelect"
       router
     >
-      <el-menu-item index="/Home">首页</el-menu-item>
-      <el-menu-item index="/Resume">简历管理</el-menu-item>
+      <el-menu-item index="/Student/Home">首页</el-menu-item>
+      <el-menu-item index="/Student/Resume">简历管理</el-menu-item>
       <el-submenu index="3">
         <template slot="title">我的</template>
-        <el-menu-item index="/MyJob">我投递的职位</el-menu-item>
-        <el-menu-item index="/MyTalk">我报名的宣讲会</el-menu-item>
+        <el-menu-item index="/Student/MyJob">我投递的职位</el-menu-item>
+        <el-menu-item index="/Student/MyTalk">我报名的宣讲会</el-menu-item>
       </el-submenu>
     </el-menu>
-    <div v-if="jobList.length>0">
-        <el-card class="searchResult" v-for="(job, index) in jobList" :key="index">
-          <el-link type="primary">{{job.jname}}</el-link>
-          <p>
-            <span>{{job.salary}}</span>
-            <el-divider direction="vertical"></el-divider>
-            <span>{{job.jplace}}</span>
-            <el-divider direction="vertical"></el-divider>
-            <span>{{job.cname}}</span>
-          </p>
-        </el-card>
-      </div>
+    <div v-if="talkList.length>0">
+      <el-card class="searchResult" v-for="(talk, index) in talkList" :key="index">
+        <el-link type="primary">{{talk.title}}</el-link>
+        <p>
+          <span>{{talk.cname}}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>{{talk.time}}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>{{talk.addr}}</span>
+        </p>
+      </el-card>
+    </div>
   </el-container>
 </template>
 
 <script>
 export default {
-  name: "MyJob",
+  name: "MyTalk",
   data() {
     return {
-      activeIndex: "/MyJob",
-      jobList: [
+      activeIndex: "/Student/MyTalk",
+      talkList: [
         {
-          jname: "C++研发实习生",
-          salary: "300-400元/天",
-          jplace: "北京",
-          cname: "北京蓦然认知科技有限公司"
+          title: "融合平台开发部宣讲会",
+          cname: "上海华为无线网络产品线",
+          time: "2020年5月15日",
+          addr: "上海交通大学东上院101"
         },
         {
-          jname: "后端研发实习生",
-          salary: "250-300元/天",
-          jplace: "杭州",
-          cname: "杭州艾耕科技有限公司"
+          title: "遇见未来技术讲座",
+          cname: "华为上海研究所",
+          time: "2020年5月14日",
+          addr: "上海交通大学东中院201"
         },
         {
-          jname: "阿里健康java实习生",
-          salary: "250-300元/天",
-          jplace: "北京",
-          cname: "阿里健康"
-        },
-        {
-          jname: "大数据开发实习生",
-          salary: "150-200元/天",
-          jplace: "上海",
-          cname: "上海比孚信息科技有限公司"
+          title: "航天科工二院宣讲会",
+          cname: "上海华为无线网络产品线",
+          time: "2020年4月23日",
+          addr: "上海交通大学下院301"
         }
-      ] // 推荐数据
+      ]
     };
   },
   created() {
-    this.getMyJob();
+    this.getMyTalk();
   },
   methods: {
-    getMyJob() {
+    getMyTalk() {
       this.$axios
-        .get(this.HOME + "/api/get_my_job", {
+        .get(this.HOME + "/api/get_my_talk", {
           params: {
             sloginid: this.Global.loginid
           }
         })
         .then(response => {
-          this.jobList = response.data;
+          this.talkList = response.data;
         });
     },
     // 返回主页
     backToMain() {
-      this.$router.push({ path: "/Home" });
+      this.$router.push({ path: "/Student/Home" });
     },
     backToLogin() {
       this.Global.loginid = "";
