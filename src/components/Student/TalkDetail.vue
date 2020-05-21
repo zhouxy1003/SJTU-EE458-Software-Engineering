@@ -38,16 +38,22 @@
     </el-menu>
 
     <el-card id="jobDetail">
-      <p id="title">{{jobDetail.jname}}</p>
-      <p id="content">薪资：{{jobDetail.salary}}</p>
-      <p id="content">工作地点：{{jobDetail.jplace}}</p>
+      <p id="title">{{talkDetail.sname}}</p>
+      <p id="content">举办单位：{{talkDetail.cname}}</p>
+      <p id="content">宣讲会地点：{{talkDetail.splace}}</p>
+      <p id="content">宣讲会时间：{{talkDetail.sdate}} {{talkDetail.sbegin}}-{{talkDetail.send}}</p>
+      <p id="content">宣讲会主题：{{talkDetail.stheme}}</p>
+      <p id="content">现场活动：{{talkDetail.sactivity}}</p>
       <el-divider></el-divider>
-      <p id="content">职位描述：</p>
-      <p id="content">{{jobDetail.detail}}</p>
-      <el-divider></el-divider>
-      <p id="content">任职要求：</p>
-      <p id="content">{{jobDetail.requirement}}</p>
-      <el-button id="deliver" type="warning" icon="el-icon-message" :disabled="deliverButton" @click="deliver()">{{buttonText}}</el-button>
+      <p id="content">宣讲会内容：</p>
+      <p id="content">{{talkDetail.scontent}}</p>
+      <el-button
+        id="deliver"
+        type="warning"
+        icon="el-icon-message"
+        :disabled="deliverButton"
+        @click="deliver()"
+      >{{buttonText}}</el-button>
     </el-card>
     <el-card id="companyInfo">
       <p id="title2">{{companyInfo.cname}}</p>
@@ -65,21 +71,22 @@
 
 <script>
 export default {
-  name: "JobDetail",
+  name: "TalkDetail",
   data() {
     return {
       deliverButton: false,
-      buttonText: "投递简历",
-      jobDetail: {
-        jobid: "1",
-        jname: "C++研发实习生",
-        salary: "300-400元/天",
-        jplace: "北京",
-        cname: "北京蓦然认知科技有限公司",
-        detail:
-          "负责组织和协调成立项目组，确定项目组成员及小组职能，有效识别项目立项输入信息是否完备，并组织和评估项目立项的必要性",
-        requirement:
-          "本科及以上学历，项目管理，电子工程，软件工程、汽车工程等相关专业"
+      buttonText: "报名宣讲会",
+      talkDetail: {
+        seminarid: "1",
+        sname: "融合平台开发部宣讲会",
+        cname: "上海华为无线网络产品线",
+        splace: "上海交通大学东上院101",
+        sdate: "2020-05-15",
+        sbegin: "10:30",
+        send: "11:30",
+        stheme: "人工智能",
+        sactivity: "内推资格",
+        scontent: "balabala"
       },
       companyInfo: {
         cname: "北京蓦然认知科技有限公司",
@@ -95,25 +102,29 @@ export default {
     };
   },
   created() {
-    this.jobDetail.jobid = this.$route.query.jobid;
-    this.showJob(this.jobDetail.jobid);
+    this.talkDetail.seminarid = this.$route.query.seminarid;
+    this.showTalk(this.talkDetail.seminarid);
   },
   methods: {
-    showJob(id) {
+    showTalk(id) {
       this.$axios
-        .get(this.HOME + "/api/show_job", {
+        .get(this.HOME + "/api/show_talk", {
           params: {
             sloginid: this.Global.loginid,
-            jobid: this.jobDetail.jobid
+            seminarid: this.talkDetail.seminarid
           }
         })
         .then(response => {
-          this.jobDetail.jname = response.data.jname;
-          this.jobDetail.salary = response.data.salary;
-          this.jobDetail.jplace = response.data.jplace;
-          this.jobDetail.cname = response.data.cname;
-          this.jobDetail.detail = response.data.jcontent;
-          this.jobDetail.requirement = response.data.jrequirement;
+          this.talkDetail.sname = response.data.sname;
+          this.talkDetail.cname = response.data.cname;
+          this.talkDetail.splace = response.data.splace;
+          this.talkDetail.cname = response.data.cname;
+          this.talkDetail.sdate = response.data.sdate;
+          this.talkDetail.sbegin = response.data.sbegin;
+          this.talkDetail.send = response.data.send;
+          this.talkDetail.stheme = response.data.stheme;
+          this.talkDetail.sactivity = response.data.sactivity;
+          this.talkDetail.scontent = response.data.scontent;
         });
     },
     showCompany(id) {
@@ -136,19 +147,19 @@ export default {
     },
     deliver() {
       this.$axios
-        .get(this.HOME + "/api/deliver_resume", {
+        .get(this.HOME + "/api/attend_talk", {
           params: {
             sloginid: this.Global.loginid,
-            jobid: this.jobDetail.jobid
+            seminarid: this.talkDetail.seminarid
           }
         })
         .then(response => {
           if (response.data.error_num === 0) {
             this.deliverButton = true;
-            this.buttonText = "已投递";
-            this.$message('简历投递成功');
+            this.buttonText = "已报名";
+            this.$message("宣讲会报名成功");
           } else {
-            this.$message.error("简历投递失败，请重试");
+            this.$message.error("宣讲会报名失败，请重试");
             console.log(response.data.msg);
           }
         });

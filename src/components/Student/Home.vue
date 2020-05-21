@@ -172,7 +172,7 @@ export default {
     },
     recommendJob() {
       this.$axios
-        .get(this.HOME + "/api/get_recommend_job", {
+        .get(this.HOME + "/api/get_recommend_jobs", {
           params: {
             sloginid: this.Global.loginid
           }

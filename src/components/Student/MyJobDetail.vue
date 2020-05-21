@@ -47,7 +47,7 @@
       <el-divider></el-divider>
       <p id="content">任职要求：</p>
       <p id="content">{{jobDetail.requirement}}</p>
-      <el-button id="deliver" type="warning" icon="el-icon-message" :disabled="deliverButton" @click="deliver()">{{buttonText}}</el-button>
+      <el-button id="deliver" type="warning" icon="el-icon-message" disabled>已投递</el-button>
     </el-card>
     <el-card id="companyInfo">
       <p id="title2">{{companyInfo.cname}}</p>
@@ -60,6 +60,16 @@
       <p id="content2">经营期限：{{companyInfo.timeLimit}}</p>
       <p id="content2">经营范围：{{companyInfo.business}}</p>
     </el-card>
+    <el-card id="timeline">
+      <p id="content">投递进度：</p>
+      <el-timeline>
+        <el-timeline-item
+          v-for="(activity, index) in activities"
+          :key="index"
+          :timestamp="activity.timestamp"
+        >{{activity.content}}</el-timeline-item>
+      </el-timeline>
+    </el-card>
   </el-container>
 </template>
 
@@ -68,8 +78,6 @@ export default {
   name: "JobDetail",
   data() {
     return {
-      deliverButton: false,
-      buttonText: "投递简历",
       jobDetail: {
         jobid: "1",
         jname: "C++研发实习生",
@@ -91,7 +99,13 @@ export default {
         timeLimit: "2016年11月01日-2046年10月31日",
         business:
           "从事汽车整车技术、汽车零部件技术、新能源技术、软件技术领域内的技术开发、技术转让、技术咨询、技术服务。"
-      }
+      },
+      activities: [
+        {
+          content: "您的简历已投递给对方",
+          timestamp: "2020-01-01"
+        }
+      ]
     };
   },
   created() {
@@ -132,25 +146,6 @@ export default {
           this.companyInfo.registerCapital = response.data.registerCapital;
           this.companyInfo.timeLimit = response.data.timeLimit;
           this.companyInfo.business = response.data.business;
-        });
-    },
-    deliver() {
-      this.$axios
-        .get(this.HOME + "/api/deliver_resume", {
-          params: {
-            sloginid: this.Global.loginid,
-            jobid: this.jobDetail.jobid
-          }
-        })
-        .then(response => {
-          if (response.data.error_num === 0) {
-            this.deliverButton = true;
-            this.buttonText = "已投递";
-            this.$message('简历投递成功');
-          } else {
-            this.$message.error("简历投递失败，请重试");
-            console.log(response.data.msg);
-          }
         });
     },
     backToMain() {
@@ -207,6 +202,12 @@ export default {
   margin-bottom: 20px;
   margin-left: 60%;
   margin-right: 20%;
+}
+#timeline {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20%;
+  margin-right: 41%;
 }
 #deliver {
   position: absolute;

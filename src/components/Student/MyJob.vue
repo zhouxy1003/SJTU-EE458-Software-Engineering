@@ -47,9 +47,9 @@
             <span>{{job.cname}}</span>
           </p>
           <p>
-            <span>投递时间：{{job.deliverTime}}</span>
+            <span>投递时间：<el-tag>这里改成demo那天的时间</el-tag></span>
               <el-divider direction="vertical"></el-divider>
-              <span>投递状态：{{job.deliverState}}</span>
+              <span>投递状态：<el-tag type="success">已投递</el-tag></span>
           </p>
         </el-card>
       </div>
@@ -68,36 +68,28 @@ export default {
           jname: "C++研发实习生",
           salary: "300-400元/天",
           jplace: "北京",
-          cname: "北京蓦然认知科技有限公司",
-          deliverTime: "2020年1月1日",
-          deliverState: "已投递"
+          cname: "北京蓦然认知科技有限公司"
         },
         {
           jobid: '2',
           jname: "后端研发实习生",
           salary: "250-300元/天",
           jplace: "杭州",
-          cname: "杭州艾耕科技有限公司",
-          deliverTime: "2020年1月1日",
-          deliverState: "已查看"
+          cname: "杭州艾耕科技有限公司"
         },
         {
           jobid: '3',
           jname: "阿里健康java实习生",
           salary: "250-300元/天",
           jplace: "北京",
-          cname: "阿里健康",
-          deliverTime: "2020年1月1日",
-          deliverState: "已结束"
+          cname: "阿里健康"
         },
         {
           jobid: '4',
           jname: "大数据开发实习生",
           salary: "150-200元/天",
           jplace: "上海",
-          cname: "上海比孚信息科技有限公司",
-          deliverTime: "2020年1月1日",
-          deliverState: "已投递"
+          cname: "上海比孚信息科技有限公司"
         }
       ] // 推荐数据
     };
@@ -119,7 +111,7 @@ export default {
     },
     jobDetail(id) {
       this.$router.push({
-        path: "/Student/JobDetail",
+        path: "/Student/MyJobDetail",
         query: { jobid: id }
       });
     },

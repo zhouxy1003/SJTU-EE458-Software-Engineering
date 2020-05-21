@@ -38,13 +38,13 @@
     </el-menu>
     <div v-if="talkList.length>0">
       <el-card class="searchResult" v-for="(talk, index) in talkList" :key="index">
-        <el-link type="primary">{{talk.title}}</el-link>
+        <el-link type="primary" @click="talkDetail(talk.seminarid)">{{talk.sname}}</el-link>
         <p>
           <span>{{talk.cname}}</span>
           <el-divider direction="vertical"></el-divider>
-          <span>{{talk.time}}</span>
+          <span>{{talk.sdate}}</span>
           <el-divider direction="vertical"></el-divider>
-          <span>{{talk.addr}}</span>
+          <span>{{talk.splace}}</span>
         </p>
       </el-card>
     </div>
@@ -59,22 +59,25 @@ export default {
       activeIndex: "/Student/MyTalk",
       talkList: [
         {
-          title: "融合平台开发部宣讲会",
+          seminarid: "1",
+          sname: "融合平台开发部宣讲会",
           cname: "上海华为无线网络产品线",
-          time: "2020年5月15日",
-          addr: "上海交通大学东上院101"
+          splace: "上海交通大学东上院101",
+          sdate: "2020-05-15"
         },
         {
-          title: "遇见未来技术讲座",
+          seminarid: "2",
+          sname: "遇见未来技术讲座",
           cname: "华为上海研究所",
-          time: "2020年5月14日",
-          addr: "上海交通大学东中院201"
+          splace: "上海交通大学东中院201",
+          sdate: "2020-05-15"
         },
         {
-          title: "航天科工二院宣讲会",
+          seminarid: "3",
+          sname: "航天科工二院宣讲会",
           cname: "上海华为无线网络产品线",
-          time: "2020年4月23日",
-          addr: "上海交通大学下院301"
+          splace: "上海交通大学下院301",
+          sdate: "2020-05-15"
         }
       ]
     };
@@ -93,6 +96,12 @@ export default {
         .then(response => {
           this.talkList = response.data;
         });
+    },
+    talkDetail(id) {
+      this.$router.push({
+        path: "/Student/MyTalkDetail",
+        query: { seminarid: id }
+      });
     },
     // 返回主页
     backToMain() {

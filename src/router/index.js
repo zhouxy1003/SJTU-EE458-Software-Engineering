@@ -10,6 +10,9 @@ import Search2 from '@/components/Student/Search2'
 import MyJob from '@/components/Student/MyJob'
 import MyTalk from '@/components/Student/MyTalk'
 import JobDetail from '@/components/Student/JobDetail'
+import MyJobDetail from '@/components/Student/MyJobDetail'
+import TalkDetail from '@/components/Student/TalkDetail'
+import MyTalkDetail from '@/components/Student/MyTalkDetail'
 
 import ResSer from '@/components/Company/ResSer'
 import Enterprice from '@/components/Company/Enterprice'
@@ -72,6 +75,21 @@ export default new Router({
       path: '/Student/JobDetail',
       name: 'JobDetail',
       component: JobDetail
+    },
+    {
+      path: '/Student/MyJobDetail',
+      name: 'MyJobDetail',
+      component: MyJobDetail
+    },
+    {
+      path: '/Student/TalkDetail',
+      name: 'TalkDetail',
+      component: TalkDetail
+    },
+    {
+      path: '/Student/MyTalkDetail',
+      name: 'MyTalkDetail',
+      component: MyTalkDetail
     },
     {
       path: '/Company/ResSer',

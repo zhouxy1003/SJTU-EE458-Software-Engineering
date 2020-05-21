@@ -104,13 +104,13 @@
           >></el-date-picker>
         </el-form-item>
         <el-form-item label="工作内容" :label-width="formLabelWidth">
-          <el-input v-model="resume.detail" autocomplete="off"></el-input>
+          <el-input type="textarea" v-model="resume.detail" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="技能介绍" :label-width="formLabelWidth">
-          <el-input v-model="resume.skill" autocomplete="off"></el-input>
+          <el-input type="textarea" v-model="resume.skill" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="自我介绍" :label-width="formLabelWidth">
-          <el-input v-model="resume.self" autocomplete="off"></el-input>
+          <el-input type="textarea" v-model="resume.self" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
