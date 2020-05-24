@@ -47,7 +47,13 @@
       <el-divider></el-divider>
       <p id="content">任职要求：</p>
       <p id="content">{{jobDetail.requirement}}</p>
-      <el-button id="deliver" type="warning" icon="el-icon-message" :disabled="deliverButton" @click="deliver()">{{buttonText}}</el-button>
+      <el-button
+        id="deliver"
+        type="warning"
+        icon="el-icon-message"
+        :disabled="deliverButton"
+        @click="deliver()"
+      >{{buttonText}}</el-button>
     </el-card>
     <el-card id="companyInfo">
       <p id="title2">{{companyInfo.cname}}</p>
@@ -68,6 +74,9 @@ export default {
   name: "JobDetail",
   data() {
     return {
+      length: 0,
+      value: 0,
+      timer: "",
       deliverButton: false,
       buttonText: "投递简历",
       jobDetail: {
@@ -79,7 +88,8 @@ export default {
         detail:
           "负责组织和协调成立项目组，确定项目组成员及小组职能，有效识别项目立项输入信息是否完备，并组织和评估项目立项的必要性",
         requirement:
-          "本科及以上学历，项目管理，电子工程，软件工程、汽车工程等相关专业"
+          "本科及以上学历，项目管理，电子工程，软件工程、汽车工程等相关专业",
+        tag: 0
       },
       companyInfo: {
         cname: "北京蓦然认知科技有限公司",
@@ -97,8 +107,34 @@ export default {
   created() {
     this.jobDetail.jobid = this.$route.query.jobid;
     this.showJob(this.jobDetail.jobid);
+    this.length += this.jobDetail.jname.length;
+    this.length += this.jobDetail.salary.length;
+    this.length += this.jobDetail.jplace.length;
+    this.length += this.jobDetail.jname.length;
+    this.length += this.jobDetail.cname.length;
+    this.length += this.jobDetail.detail.length;
+    this.length += this.jobDetail.requirement.length;
+    console.log(this.length);
+    this.timer = setInterval(this.viewTime, 120 * this.length);
   },
   methods: {
+    viewTime() {
+      this.$axios
+        .get(this.HOME + "/api/view_time", {
+          params: {
+            sloginid: this.Global.loginid,
+            tag: this.jobDetail.tag
+          }
+        })
+        .then(response => {
+          this.jobDetail.jname = response.data.jname;
+          this.jobDetail.salary = response.data.salary;
+          this.jobDetail.jplace = response.data.jplace;
+          this.jobDetail.cname = response.data.cname;
+          this.jobDetail.detail = response.data.jcontent;
+          this.jobDetail.requirement = response.data.jrequirement;
+        });
+    },
     showJob(id) {
       this.$axios
         .get(this.HOME + "/api/show_job", {
@@ -114,6 +150,7 @@ export default {
           this.jobDetail.cname = response.data.cname;
           this.jobDetail.detail = response.data.jcontent;
           this.jobDetail.requirement = response.data.jrequirement;
+          this.jobDetail.tag = response.data.tag;
         });
     },
     showCompany(id) {
@@ -146,7 +183,7 @@ export default {
           if (response.data.error_num === 0) {
             this.deliverButton = true;
             this.buttonText = "已投递";
-            this.$message('简历投递成功');
+            this.$message("简历投递成功");
           } else {
             this.$message.error("简历投递失败，请重试");
             console.log(response.data.msg);
@@ -162,6 +199,9 @@ export default {
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    beforeDestroy() {
+      clearInterval(this.timer);
     }
   }
 };
