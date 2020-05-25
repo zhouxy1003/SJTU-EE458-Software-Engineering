@@ -38,13 +38,13 @@
     </el-menu>
     <div v-if="talkList.length>0">
       <el-card class="searchResult" v-for="(talk, index) in talkList" :key="index">
-        <el-link type="primary" @click="talkDetail(talk.seminarid)">{{talk.sname}}</el-link>
+        <el-link type="primary" @click="talkDetail(talk.pk)">{{talk.fields.sname}}</el-link>
         <p>
-          <span>{{talk.cname}}</span>
+          <span>{{talk.fields.cname}}</span>
           <el-divider direction="vertical"></el-divider>
-          <span>{{talk.sdate}}</span>
+          <span>{{talk.fields.sdate}}</span>
           <el-divider direction="vertical"></el-divider>
-          <span>{{talk.splace}}</span>
+          <span>{{talk.fields.splace}}</span>
         </p>
       </el-card>
     </div>
@@ -59,25 +59,31 @@ export default {
       activeIndex: "/Student/MyTalk",
       talkList: [
         {
-          seminarid: "1",
-          sname: "融合平台开发部宣讲会",
-          cname: "上海华为无线网络产品线",
-          splace: "上海交通大学东上院101",
-          sdate: "2020-05-15"
+          pk: "1",
+          fields: {
+            sname: "融合平台开发部宣讲会",
+            cname: "上海华为无线网络产品线",
+            stime: "2020年5月15日",
+            splace: "上海交通大学东上院101"
+          }
         },
         {
-          seminarid: "2",
-          sname: "遇见未来技术讲座",
-          cname: "华为上海研究所",
-          splace: "上海交通大学东中院201",
-          sdate: "2020-05-15"
+          pk: "2",
+          fields: {
+            sname: "遇见未来技术讲座",
+            cname: "华为上海研究所",
+            stime: "2020年5月14日",
+            splace: "上海交通大学东中院201"
+          }
         },
         {
-          seminarid: "3",
-          sname: "航天科工二院宣讲会",
-          cname: "上海华为无线网络产品线",
-          splace: "上海交通大学下院301",
-          sdate: "2020-05-15"
+          pk: "3",
+          fields: {
+            sname: "航天科工二院宣讲会",
+            cname: "上海华为无线网络产品线",
+            stime: "2020年4月23日",
+            splace: "上海交通大学下院301"
+          }
         }
       ]
     };
@@ -94,7 +100,12 @@ export default {
           }
         })
         .then(response => {
-          this.talkList = response.data;
+          if (response.data.error_num === "0") {
+            this.talkList = response.data.data;
+          } else {
+            this.$message.error("推荐宣讲会信息失败");
+            console.log(response.data.msg);
+          }
         });
     },
     talkDetail(id) {
