@@ -68,7 +68,7 @@
               <el-option label="微型（X<10人）" value="微型"></el-option>
               <el-option label="小型（10≤X<100人）" value="小型"></el-option>
               <el-option label="中型（100≤X<300人）" value="中型"></el-option>
-              <el-option label="大型（X≥300人）" value="大型"></el-option>
+              <el-option label="大型（X≤300人）" value="大型"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="公司地址" :label-width="formLabelWidth">
@@ -133,17 +133,17 @@ export default {
       activeIndex: "/Company/Enterprice",
       companyDialogFormVisible: false,
       companyForm: {
-        cname: "",
-        industry: "",
-        scale: "",
-        place: "",
-        registerDate: "",
-        registerCapital: "",
-        timebegin: "",
-        timeend: "",
-        cemail: "",
-        ctel: "",
-        business: ""
+        cname: "腾讯科技（上海）有限公司",
+        industry: "软件和信息技术服务业",
+        scale: "大型（X≤300人）",
+        place: "上海市徐汇区漕河泾开发区腾云大楼",
+        registerDate: "1998-11-11",
+        registerCapital: "6500万",
+        timebegin: "1998-11-11",
+        timeend: "2028-11-11",
+        cemail: "service@tencent.com",
+        ctel: "83765566",
+        business: "计算机软、硬件的设计、技术开发"
       },
       created() {
         //this.showcompanyForm();

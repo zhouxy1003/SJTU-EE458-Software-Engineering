@@ -141,7 +141,7 @@ export default {
           this.companyInfo.cname = response.data.cname;
           this.companyInfo.industry = response.data.industry;
           this.companyInfo.scale = response.data.scale;
-          this.companyInfo.place = response.data.place;
+          this.companyInfo.place = response.data.caddress;
           this.companyInfo.registerDate = response.data.registerDate;
           this.companyInfo.registerCapital = response.data.registerCapital;
           this.companyInfo.timeLimit = response.data.timeLimit;

@@ -156,8 +156,7 @@ export default {
       resumeContent: {},
       resumeData: [
         {
-          id: "0",
-          sname: "张三",
+          sname: "王鑫凯",
           school: "上海交通大学",
           major: "计算机科学与技术",
           content: {
@@ -188,7 +187,6 @@ export default {
       },
       tableData: [
         {
-          jobid: "0",
           jname: "web前端开发实习生",
           jplace: "上海",
           salary: "200/天",
