@@ -7,7 +7,7 @@
       <el-button type="text" @click="studentDialogFormVisible2 = true">点击登录</el-button>
       <el-dialog title="学生用户注册" :visible.sync="studentDialogFormVisible">
         <el-form ref="studentForm" :model="studentForm" :rules="studentRules">
-          <el-form-item label="用户�?" prop="loginid" :label-width="formLabelWidth">
+          <el-form-item label="用户名" prop="loginid" :label-width="formLabelWidth">
             <el-input v-model="studentForm.loginid" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password" :label-width="formLabelWidth">
@@ -31,13 +31,13 @@
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="resetForm('studentForm')">�? �?</el-button>
-          <el-button type="primary" @click="addStudent('studentForm')">�? �?</el-button>
+          <el-button @click="resetForm('studentForm')">取 消</el-button>
+          <el-button type="primary" @click="addStudent('studentForm')">确 定</el-button>
         </div>
       </el-dialog>
       <el-dialog title="学生用户登录" :visible.sync="studentDialogFormVisible2">
         <el-form ref="studentForm2" :model="studentForm2" :rules="studentRules2">
-          <el-form-item label="用户�?" prop="loginid" :label-width="formLabelWidth">
+          <el-form-item label="用户名" prop="loginid" :label-width="formLabelWidth">
             <el-input v-model="studentForm2.loginid" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password" :label-width="formLabelWidth">
@@ -45,8 +45,8 @@
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="resetForm('studentForm2')">�? �?</el-button>
-          <el-button type="primary" @click="loginStudent()">�? �?</el-button>
+          <el-button @click="resetForm('studentForm2')">取 消</el-button>
+          <el-button type="primary" @click="loginStudent()">确 定</el-button>
         </div>
       </el-dialog>
       <el-dialog title="请选择你的兴趣" :visible.sync="interestDialogFormVisible">
@@ -58,7 +58,7 @@
           >{{interest.name}}</el-checkbox>
         </el-checkbox-group>
         <div slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="interest()">�? �?</el-button>
+          <el-button type="primary" @click="interest()">确 定</el-button>
         </div>
       </el-dialog>
     </el-card>
@@ -70,13 +70,13 @@
       <el-button type="text" @click="companyDialogFormVisible2 = true">点击登录</el-button>
       <el-dialog title="企业用户注册" :visible.sync="companyDialogFormVisible">
         <el-form ref="companyForm" :model="companyForm" :rules="companyRules">
-          <el-form-item label="用户�?" prop="loginid" :label-width="formLabelWidth">
+          <el-form-item label="用户名" prop="loginid" :label-width="formLabelWidth">
             <el-input v-model="companyForm.loginid" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password" :label-width="formLabelWidth">
             <el-input v-model="companyForm.password" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="企业�?" prop="name" :label-width="formLabelWidth">
+          <el-form-item label="企业名" prop="name" :label-width="formLabelWidth">
             <el-input v-model="companyForm.name" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="电话" prop="tel" :label-width="formLabelWidth">
@@ -87,13 +87,13 @@
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="resetForm('companyForm')">�? �?</el-button>
-          <el-button type="primary" @click="addCompany('companyForm')">�? �?</el-button>
+          <el-button @click="resetForm('companyForm')">取 消</el-button>
+          <el-button type="primary" @click="addCompany('companyForm')">确 定</el-button>
         </div>
       </el-dialog>
       <el-dialog title="企业用户登录" :visible.sync="companyDialogFormVisible2">
         <el-form ref="companyForm2" :model="companyForm2" :rules="companyRules2">
-          <el-form-item label="用户�?" prop="loginid" :label-width="formLabelWidth">
+          <el-form-item label="用户名" prop="loginid" :label-width="formLabelWidth">
             <el-input v-model="companyForm2.loginid" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password" :label-width="formLabelWidth">
@@ -101,8 +101,8 @@
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="resetForm('companyForm2')">�? �?</el-button>
-          <el-button type="primary" @click="loginCompany()">�? �?</el-button>
+          <el-button @click="resetForm('companyForm2')">取 消</el-button>
+          <el-button type="primary" @click="loginCompany()">确 定</el-button>
         </div>
       </el-dialog>
     </el-card>
@@ -129,11 +129,11 @@ export default {
       },
       studentRules: {
         loginid: [{ required: true, message: "请填写用户名", trigger: "blur" }],
-        password: [{ required: true, message: "请填写密�?", trigger: "blur" }],
-        name: [{ required: true, message: "请填写姓�?", trigger: "blur" }],
+        password: [{ required: true, message: "请填写密码", trigger: "blur" }],
+        name: [{ required: true, message: "请填写姓名", trigger: "blur" }],
         grade: [{ required: true, message: "请选择年级", trigger: "change" }],
-        school: [{ required: true, message: "请填写学�?", trigger: "blur" }],
-        major: [{ required: true, message: "请填写专�?", trigger: "blur" }]
+        school: [{ required: true, message: "请填写学校", trigger: "blur" }],
+        major: [{ required: true, message: "请填写专业", trigger: "blur" }]
       },
       studentForm2: {
         loginid: "",
@@ -141,7 +141,7 @@ export default {
       },
       studentRules2: {
         loginid: [{ required: true, message: "请填写用户名", trigger: "blur" }],
-        password: [{ required: true, message: "请填写密�?", trigger: "blur" }]
+        password: [{ required: true, message: "请填写密码", trigger: "blur" }]
       },
       companyForm: {
         loginid: "",
@@ -152,9 +152,9 @@ export default {
       },
       companyRules: {
         loginid: [{ required: true, message: "请填写用户名", trigger: "blur" }],
-        password: [{ required: true, message: "请填写密�?", trigger: "blur" }],
-        name: [{ required: true, message: "请填写姓�?", trigger: "blur" }],
-        tel: [{ required: true, message: "请填写电�?", trigger: "blur" }],
+        password: [{ required: true, message: "请填写密码", trigger: "blur" }],
+        name: [{ required: true, message: "请填写姓名", trigger: "blur" }],
+        tel: [{ required: true, message: "请填写电话", trigger: "blur" }],
         address: [{ required: true, message: "请填写地址", trigger: "blur" }]
       },
       companyForm2: {
@@ -163,20 +163,20 @@ export default {
       },
       companyRules2: {
         loginid: [{ required: true, message: "请填写用户名", trigger: "blur" }],
-        password: [{ required: true, message: "请填写密�?", trigger: "blur" }]
+        password: [{ required: true, message: "请填写密码", trigger: "blur" }]
       },
       interestList: [
-        { name: "互联�?", id: 1 },
+        { name: "互联网", id: 1 },
         { name: "电子", id: 2 },
         { name: "金融", id: 3 },
-        { name: "销�?", id: 4 },
+        { name: "销售", id: 4 },
         { name: "人事", id: 5 },
         { name: "餐饮", id: 6 },
         { name: "旅游", id: 7 },
         { name: "健身", id: 8 },
         { name: "房产中介", id: 9 },
         { name: "家政", id: 10 },
-        { name: "交通服�?", id: 11 },
+        { name: "交通服务", id: 11 },
         { name: "法律", id: 12 },
         { name: "编辑", id: 13 },
         { name: "医疗", id: 14 },
@@ -247,29 +247,29 @@ export default {
       });
     },
     loginStudent() {
-      // this.$axios
-      //   .get(this.HOME + "/api/student_login", {
-      //     params: {
-      //       sloginid: this.studentForm2.loginid,
-      //       spassword: this.studentForm2.password
-      //     }
-      //   })
-      //   .then(response => {
-      //     // var res = JSON.parse(response.bodyText);
-      //     if (response.data.error_num === 0) {
-      //       this.Global.loginid = this.studentForm2.loginid;
-      //       this.$router.push({
-      //         path: "/Student/Home"
-      //       });
-      //     } else {
-      //       this.$message.error("密码错误，请重试");
-      //       console.log(response.data.msg);
-      //     }
-      //   });
-      this.Global.loginid = this.studentForm2.loginid;
-      this.$router.push({
-        path: "/Student/Home"
-      });
+      this.$axios
+        .get(this.HOME + "/api/student_login", {
+          params: {
+            sloginid: this.studentForm2.loginid,
+            spassword: this.studentForm2.password
+          }
+        })
+        .then(response => {
+          // var res = JSON.parse(response.bodyText);
+          if (response.data.error_num === 0) {
+            this.Global.loginid = this.studentForm2.loginid;
+            this.$router.push({
+              path: "/Student/Home"
+            });
+          } else {
+            this.$message.error("密码错误，请重试");
+            console.log(response.data.msg);
+          }
+        });
+      // this.Global.loginid = this.studentForm2.loginid;
+      // this.$router.push({
+      //   path: "/Student/Home"
+      // });
     },
     loginCompany() {
       this.$axios
