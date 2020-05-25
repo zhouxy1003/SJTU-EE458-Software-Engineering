@@ -181,7 +181,7 @@ export default {
           if (response.data.error_num === 0) {
             this.jobList = response.data.data;
           } else {
-            this.$message.error("无推荐信息");
+            this.$message.error("推荐职位信息失败");
             console.log(response.data.msg);
           }
         });

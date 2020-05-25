@@ -171,7 +171,12 @@ export default {
           }
         })
         .then(response => {
-          this.talkList = response.data;
+          if (response.data.error_num === 0) {
+            this.talkList = response.data.data;
+          } else {
+            this.$message.error("推荐宣讲会信息失败");
+            console.log(response.data.msg);
+          }
         });
     },
     talkDetail(id) {
