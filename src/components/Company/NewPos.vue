@@ -139,25 +139,26 @@ export default {
   },
   methods: {
     addpositionForm() {
-      this.$axios
-        .get(this.HOME + "/api/add_job", {
-          params: {
-            companyid: this.Global.loginid,
-            jname: this.positionForm.jname,
-            jplace: this.positionForm.jplace,
-            salary: this.positionForm.salary,
-            jcontent: this.positionForm.detail,
-            jrequirement: this.positionForm.requirement
-          }
-        })
-        .then(responese => {
-          if (responese.data.error_num === 0) {
-            this.$router.push({ path: "/Company/ManPos" });
-          } else {
-            this.$message.error("职位发布失败，请重试");
-            console.log(responese.data.msg);
-          }
-        });
+      // this.$axios
+      //   .get(this.HOME + "/api/add_job", {
+      //     params: {
+      //       companyid: this.Global.loginid,
+      //       jname: this.positionForm.jname,
+      //       jplace: this.positionForm.jplace,
+      //       salary: this.positionForm.salary,
+      //       jcontent: this.positionForm.detail,
+      //       jrequirement: this.positionForm.requirement
+      //     }
+      //   })
+      //   .then(responese => {
+      //     if (responese.data.error_num === 0) {
+      //       this.$router.push({ path: "/Company/ManPos" });
+      //     } else {
+      //       this.$message.error("职位发布失败，请重试");
+      //       console.log(responese.data.msg);
+      //     }
+      //   });
+      this.$router.push({ path: "/Company/ManPos" });
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

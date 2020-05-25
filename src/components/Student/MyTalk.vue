@@ -16,7 +16,7 @@
           <h6>Welcome: {{this.Global.loginid}}</h6>
         </div>
       </el-col>
-      <el-col :span="1" :offset="12">
+      <el-col :span="1" :offset="10">
         <el-button id="exit" type="primary" @click="backToLogin">退出登录</el-button>
       </el-col>
     </el-row>
@@ -42,10 +42,13 @@
         <p>
           <span>{{talk.fields.cname}}</span>
           <el-divider direction="vertical"></el-divider>
-          <span>{{talk.fields.sdate}}</span>
+          <span>{{talk.fields.stime}}</span>
           <el-divider direction="vertical"></el-divider>
           <span>{{talk.fields.splace}}</span>
         </p>
+        <p>
+              <span>报名状态：<el-tag type="success">报名成功</el-tag></span>
+          </p>
       </el-card>
     </div>
   </el-container>

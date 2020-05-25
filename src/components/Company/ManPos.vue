@@ -76,10 +76,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-dialog
-          title="提示"
-          :visible.sync="dialogFormVisible"
-          width="30%">
+        <el-dialog title="提示" :visible.sync="dialogFormVisible" width="30%">
           <el-form :model="editObj">
             <el-form-item label="职位名称">
               <el-input v-model="editObj.jname" auto-complete="off"></el-input>
@@ -137,7 +134,7 @@
           <h4>自我介绍</h4>
           <p>{{resumeContent.self}}</p>
           <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="resumeContentVisible = false">通过</el-button>
+            <el-button type="primary" @click="qualify()">通过</el-button>
             <el-button type="danger" @click="resumeContentVisible = false">不通过</el-button>
           </span>
         </el-dialog>
@@ -204,6 +201,20 @@ export default {
     // this.showManPosForm();
   },
   methods: {
+    qualify() {
+      this.$axios
+        .get(this.HOME + "/api/interview", {
+          params: {}
+        })
+        .then(response => {
+          if (response.data.error_num === 0) {
+            this.resumeContentVisible = false;
+          } else {
+            this.$message.error("通过简历失败");
+            console.log(response.data.msg);
+          }
+        });
+    },
     showResumeList(index, row) {
       this.resumeListVisible = true;
     },

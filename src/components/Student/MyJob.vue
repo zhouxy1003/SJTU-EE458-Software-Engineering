@@ -16,7 +16,7 @@
           <h6>Welcome: {{this.Global.loginid}}</h6>
         </div>
       </el-col>
-      <el-col :span="1" :offset="12">
+      <el-col :span="1" :offset="10">
         <el-button id="exit" type="primary" @click="backToLogin()">退出登录</el-button>
       </el-col>
     </el-row>
@@ -37,22 +37,28 @@
       </el-submenu>
     </el-menu>
     <div v-if="jobList.length>0">
-        <el-card class="searchResult" v-for="(job, index) in jobList" :key="index">
-          <el-link type="primary" @click="jobDetail(job.pk)">{{job.fields.jname}}</el-link>
-          <p>
-            <span>{{job.fields.salary}}</span>
-            <el-divider direction="vertical"></el-divider>
-            <span>{{job.fields.jplace}}</span>
-            <el-divider direction="vertical"></el-divider>
-            <span>{{job.fields.cname}}</span>
-          </p>
-          <p>
-            <span>投递时间：<el-tag>这里改成demo那天的时间</el-tag></span>
-              <el-divider direction="vertical"></el-divider>
-              <span>投递状态：<el-tag type="success">已投递</el-tag></span>
-          </p>
-        </el-card>
-      </div>
+      <el-card class="searchResult" v-for="(job, index) in jobList" :key="index">
+        <el-link type="primary" @click="jobDetail(job.pk)">{{job.fields.jname}}</el-link>
+        <p>
+          <span>{{job.fields.salary}}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>{{job.fields.jplace}}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>{{job.fields.cname}}</span>
+        </p>
+        <p>
+          <span>
+            投递时间：
+            <el-tag>这里改成demo那天的时间</el-tag>
+          </span>
+          <el-divider direction="vertical"></el-divider>
+          <span>
+            投递状态：
+            <el-tag :type="stateType">{{stateText}}</el-tag>
+          </span>
+        </p>
+      </el-card>
+    </div>
   </el-container>
 </template>
 
@@ -62,6 +68,9 @@ export default {
   data() {
     return {
       activeIndex: "/Student/MyJob",
+      state: "",
+      stateText: "",
+      stateType: "",
       jobList: [
         {
           pk: "1",
@@ -106,6 +115,13 @@ export default {
   },
   created() {
     this.getMyJob();
+    if (this.state == "0") {
+      this.stateText = "已投递";
+      this.stateType = "warning";
+    } else if (this.state == "1") {
+      this.stateText = "已通过";
+      this.stateType = "success";
+    }
   },
   methods: {
     getMyJob() {
@@ -118,6 +134,7 @@ export default {
         .then(response => {
           if (response.data.error_num === "0") {
             this.jobList = response.data.data;
+            this.state = response.data.time;
           } else {
             this.$message.error("获取我投递的职位信息失败");
             console.log(response.data.msg);

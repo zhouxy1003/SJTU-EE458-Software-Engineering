@@ -181,27 +181,28 @@ export default {
   },
   methods: {
     addtalkForm() {
-      this.$axios
-        .get(this.HOME + "/api/add_seminar", {
-          params: {
-            sname: this.talkForm.sname,
-            splace: this.talkForm.splace,
-            sdate: this.talkForm.sdate,
-            sbegin: this.talkForm.sbegin,
-            send: this.talkForm.send,
-            stheme: this.talkForm.stheme,
-            sactivity: this.talkForm.sactivity,
-            scontent: this.talkForm.scontent
-          }
-        })
-        .then(responese => {
-          if (responese.data.error_num === 0) {
-            this.$router.push({ path: "/Company/ManTalk" });
-          } else {
-            this.$message.error("宣讲会发布失败，请重试");
-            console.log(responese.data.msg);
-          }
-        });
+      // this.$axios
+      //   .get(this.HOME + "/api/add_seminar", {
+      //     params: {
+      //       sname: this.talkForm.sname,
+      //       splace: this.talkForm.splace,
+      //       sdate: this.talkForm.sdate,
+      //       sbegin: this.talkForm.sbegin,
+      //       send: this.talkForm.send,
+      //       stheme: this.talkForm.stheme,
+      //       sactivity: this.talkForm.sactivity,
+      //       scontent: this.talkForm.scontent
+      //     }
+      //   })
+      //   .then(responese => {
+      //     if (responese.data.error_num === 0) {
+      //       this.$router.push({ path: "/Company/ManTalk" });
+      //     } else {
+      //       this.$message.error("宣讲会发布失败，请重试");
+      //       console.log(responese.data.msg);
+      //     }
+      //   });
+      this.$router.push({ path: "/Company/ManTalk" });
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

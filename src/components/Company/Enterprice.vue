@@ -81,8 +81,8 @@
             <el-input v-model="companyForm.registerCapital" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="经营期限" :label-width="formLabelWidth">
-            <el-date-picker v-model="companyForm.timebegin" type="date" placeholder="选择开始日期"  value-format="yyyy-MM-dd"></el-date-picker>
-            <el-date-picker v-model="companyForm.timeend" type="date" placeholder="选择结束日期"  value-format="yyyy-MM-dd"></el-date-picker>
+            <el-date-picker v-model="companyForm.timebegin" type="date" placeholder="选择开始日期" value-format="yyyy-MM-dd"></el-date-picker>
+            <el-date-picker v-model="companyForm.timeend" type="date" placeholder="选择结束日期" value-format="yyyy-MM-dd"></el-date-picker>
           </el-form-item>
           <el-form-item label="联系电话" prop="ctel" :label-width="formLabelWidth">
             <el-input v-model="companyForm.ctel" autocomplete="off"></el-input>
@@ -97,7 +97,7 @@
 
         <div slot="footer" class="dialog-footer">
           <el-button @click="companyDialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addcompanyForm()">确 定</el-button>
+          <el-button type="primary" @click="companyDialogFormVisible = false">确 定</el-button>
         </div>
       </el-dialog>
 
@@ -111,7 +111,7 @@
         <p id="content">公司地址：{{companyForm.place}}</p>
         <p id="content">注册时间：{{companyForm.registerDate}}</p>
         <p id="content">注册资本：{{companyForm.registerCapital}}</p>
-        <p id="content">经营期限：{{companyForm.timebegin}}至{{companyForm.timeend}}</p>
+        <p id="content">经营期限：{{companyForm.timebegin}} 至 {{companyForm.timeend}}</p>
         <p id="content">联系电话：{{companyForm.ctel}}</p>
         <p id="content">工作邮箱：{{companyForm.cemail}}</p>
         <p id="content">经营范围：{{companyForm.business}}</p>
@@ -133,20 +133,20 @@ export default {
       activeIndex: "/Company/Enterprice",
       companyDialogFormVisible: false,
       companyForm: {
-        scale: "",
-        cemail: "",
-        ctel: "",
         cname: "",
         industry: "",
+        scale: "",
         place: "",
         registerDate: "",
         registerCapital: "",
-        timebegin: "___________",
-        timeend: "____________",
+        timebegin: "",
+        timeend: "",
+        cemail: "",
+        ctel: "",
         business: ""
       },
       created() {
-        this.showcompanyForm();
+        //this.showcompanyForm();
       },
       formLabelWidth: "100px"
     };

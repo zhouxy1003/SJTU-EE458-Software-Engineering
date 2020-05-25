@@ -16,7 +16,7 @@
           <h6>Welcome: {{this.Global.loginid}}</h6>
         </div>
       </el-col>
-      <el-col :span="1" :offset="12">
+      <el-col :span="1" :offset="10">
         <el-button id="exit" type="primary" @click="backToLogin()">退出登录</el-button>
       </el-col>
     </el-row>
@@ -53,7 +53,7 @@
           </el-select>
         </el-col>
         <el-col :span="3">
-          <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
+          <el-button type="primary" icon="el-icon-search" @click="search()">搜索</el-button>
         </el-col>
       </el-row>
       <el-row type="flex" justify="start">
