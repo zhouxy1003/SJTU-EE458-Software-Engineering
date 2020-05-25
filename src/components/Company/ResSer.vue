@@ -15,7 +15,7 @@
         </el-col>
         <el-col :span="2">
           <div class="headText2">
-            <h6>Welcome: 98757</h6>
+            <h6>Welcome: {{this.Global.loginid}}</h6>
           </div>
         </el-col>
         <el-col :span="1" :offset="10">
@@ -34,24 +34,24 @@
         active-text-color="#ffd04b"
         router
       >
-       <el-menu-item index="/Company/Enterprice" class="el-icon-setting">资料完善</el-menu-item>
-       
-       
-      <el-submenu index="2" >
-        <template slot="title"><i class="el-icon-location"></i>职位管理</template>
-        <el-menu-item index="/Company/NewPos">发布职位</el-menu-item>
-        <el-menu-item index="/Company/ManPos">管理职位</el-menu-item>
-      </el-submenu>
-      <el-submenu index="3" >
-        
-        <template slot="title">
-          <i class="el-icon-menu"></i>宣讲会管理</template>
-        
-        <el-menu-item index="/Company/NewTalk">发布宣讲会</el-menu-item>
-        <el-menu-item index="/Company/ManTalk">管理宣讲会</el-menu-item>
-      </el-submenu>
-       <el-menu-item index="/Company/ResSer" class="el-icon-document">简历库</el-menu-item>
-      
+        <el-menu-item index="/Company/Enterprice" class="el-icon-setting">资料完善</el-menu-item>
+
+        <el-submenu index="2">
+          <template slot="title">
+            <i class="el-icon-location"></i>职位管理
+          </template>
+          <el-menu-item index="/Company/NewPos">发布职位</el-menu-item>
+          <el-menu-item index="/Company/ManPos">管理职位</el-menu-item>
+        </el-submenu>
+        <el-submenu index="3">
+          <template slot="title">
+            <i class="el-icon-menu"></i>宣讲会管理
+          </template>
+
+          <el-menu-item index="/Company/NewTalk">发布宣讲会</el-menu-item>
+          <el-menu-item index="/Company/ManTalk">管理宣讲会</el-menu-item>
+        </el-submenu>
+        <el-menu-item index="/Company/ResSer" class="el-icon-document">简历库</el-menu-item>
       </el-menu>
 
       <el-card class="search">
@@ -59,26 +59,16 @@
           <el-col :span="12">
             <el-input v-model="searchinput" placeholder="搜索一下" clearable @clear="clearInput"></el-input>
           </el-col>
+
           <el-col :span="3">
-            <el-select v-model="value" @change="optionChange" filterable placeholder="请选择">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="3">
-            <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
+            <el-button type="primary" icon="el-icon-search" @click="search(searchinput)">搜索</el-button>
           </el-col>
         </el-row>
-        <el-row type="flex" justify="start">
-        </el-row>
+        <el-row type="flex" justify="start"></el-row>
         <el-table :data="searchData" style="width: 100%">
           <el-table-column prop="sname" label="姓名" width="180"></el-table-column>
-          <el-table-column prop="stel" label="手机" width="180"></el-table-column>
-          <el-table-column prop="email" label="邮箱" width="180"></el-table-column>
+          <el-table-column prop="school" label="学校" width="180"></el-table-column>
+          <el-table-column prop="major" label="专业" width="180"></el-table-column>
           <el-table-column label="操作">
             <template v-slot="scope">
               <el-button type="primary" @click="showContent(scope.row)">查看</el-button>
@@ -87,6 +77,9 @@
         </el-table>
 
         <el-dialog title="简历内容" :visible.sync="contentVisible" width="50%">
+          <h4>个人信息</h4>
+          <p>手机：{{resumeContent.stel}}</p>
+          <p>邮箱：{{resumeContent.email}}</p>
           <h4>教育信息</h4>
           <p>学校名称：{{resumeContent.school}}</p>
           <p>专业名称：{{resumeContent.major}}</p>
@@ -98,7 +91,7 @@
           <p>职位名称：{{resumeContent.pname}}</p>
           <p>工作地点：{{resumeContent.place}}</p>
           <p>实习时间：{{resumeContent.expBegin}}</p>
-         
+
           <p>工作内容：{{resumeContent.detail}}</p>
           <h4>技能介绍</h4>
           <p>{{resumeContent.skill}}</p>
@@ -106,7 +99,7 @@
           <p>{{resumeContent.self}}</p>
           <span slot="footer" class="dialog-footer">
             <el-button @click="contentVisible = false">关 闭</el-button>
-            <el-button type="primary" @click="sendInvitation">发送邀请</el-button>
+            <el-button type="primary" @click="contentVisible = false">发送邀请</el-button>
           </span>
         </el-dialog>
       </el-card>
@@ -116,7 +109,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "companyForm",
   data() {
@@ -128,12 +120,13 @@ export default {
         {
           id: "0",
           sname: "李四",
-          stel: "13800000000",
-          email: "123@qq.com",
           school: "上海交通大学",
+          major: "计算机科学与技术",
           content: {
+            stel: "13800000000",
+            email: "123@qq.com",
             school: "上海交通大学",
-            major: "计算机科学与技",
+            major: "计算机科学与技术",
             eduBegin: "2017.09",
             grade: "大三",
             cname: "字节跳动",
@@ -149,12 +142,13 @@ export default {
         {
           id: "1",
           sname: "张三",
-          stel: "13800000000",
-          email: "123@qq.com",
           school: "上海交通大学",
+          major: "计算机科学与技术",
           content: {
+            stel: "13800000000",
+            email: "123@qq.com",
             school: "上海交通大学",
-            major: "计算机科学与技",
+            major: "计算机科学与技术",
             eduBegin: "2017.09",
             grade: "大三",
             cname: "字节跳动",
@@ -170,12 +164,13 @@ export default {
         {
           id: "2",
           sname: "王五",
-          stel: "13800000000",
-          email: "123@qq.com",
           school: "上海交通大学",
+          major: "计算机科学与技术",
           content: {
+            stel: "13800000000",
+            email: "123@qq.com",
             school: "上海交通大学",
-            major: "计算机科学与技",
+            major: "计算机科学与技术",
             eduBegin: "2017.09",
             grade: "大三",
             cname: "字节跳动",
@@ -199,35 +194,18 @@ export default {
         industry: "",
         place: ""
       },
-      hotSearch: {
-        first: "热门搜索1",
-        second: "热门搜索2",
-        third: "热门搜索3"
-      },
-      options: [
-        {
-          value: "sname",
-          label: "姓名"
-        },
-        {
-          value: "school",
-          label: "学校"
-        }
-      ],
       value: "sname",
       searchinput: "",
       formLabelWidth: "100px"
     };
   },
-
+  created() {
+    this.searchData = this.resData;
+  },
   methods: {
-    sendInvitation() {
-      this.$message.success('邀请已发送')
-      this.contentVisible = false
-    },
     showContent(row) {
       this.contentVisible = true;
-      this.resumeContent = row.content
+      this.resumeContent = row.content;
       console.log(row);
     },
     optionChange() {
@@ -236,20 +214,19 @@ export default {
     clearInput() {
       this.searchData = [];
     },
-    search() {
-      const res = this.resData.filter(item => {
-        return item[this.value].includes(this.searchinput) == true;
-      });
-      // console.log(res);
-      if (res.length > 0) {
-        this.searchData = res;
-      } else {
-        this.$message.error("没有结果");
+    search(str) {
+      if (str) {
+        this.searchData = this.resData.filter(function(person) {
+          return Object.keys(person).some(function(key) {
+            // 每一项数据的参数名
+            return (
+              String(person[key])
+                .toLowerCase() // 字符串转换小写
+                .indexOf(str) > -1 // 返回某个指定的字符串值在字符串中首次出现的位置
+            );
+          });
+        });
       }
-    },
-    resetForm(form) {
-      this.$refs[form].resetFields();
-      this.companyDialogFormVisible = false;
     },
     // 返回主页
     backToMain() {
@@ -259,12 +236,6 @@ export default {
       this.$router.push({ path: "/" });
     },
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
       console.log(key, keyPath);
     }
   }

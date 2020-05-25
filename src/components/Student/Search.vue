@@ -96,9 +96,9 @@ export default {
       value: "职位",
       searchinput: "",
       hotSearch: {
-        first: "热门搜索1",
-        second: "热门搜索2",
-        third: "热门搜索3"
+        first: "java",
+        second: "大数据",
+        third: "工程师"
       },
       jobList: [
         {

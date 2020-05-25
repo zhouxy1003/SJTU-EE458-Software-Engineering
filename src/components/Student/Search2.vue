@@ -96,9 +96,9 @@ export default {
       value: "宣讲会",
       searchinput: "",
       hotSearch: {
-        first: "热门搜索1",
-        second: "热门搜索2",
-        third: "热门搜索3"
+        first: "游戏运营",
+        second: "数据挖掘",
+        third: "Web前端"
       },
       talkList: [
         {

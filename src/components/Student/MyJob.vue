@@ -115,13 +115,6 @@ export default {
   },
   created() {
     this.getMyJob();
-    if (this.state == "0") {
-      this.stateText = "已投递";
-      this.stateType = "warning";
-    } else if (this.state == "1") {
-      this.stateText = "已通过";
-      this.stateType = "success";
-    }
   },
   methods: {
     getMyJob() {
@@ -135,6 +128,13 @@ export default {
           if (response.data.error_num === "0") {
             this.jobList = response.data.data;
             this.state = response.data.time;
+            if (this.state === "0") {
+              this.stateText = "已投递";
+              this.stateType = "warning";
+            } else if (this.state === "1") {
+              this.stateText = "已通过";
+              this.stateType = "success";
+            }
           } else {
             this.$message.error("获取我投递的职位信息失败");
             console.log(response.data.msg);

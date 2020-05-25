@@ -66,7 +66,7 @@
     <div class="banner">
       <el-carousel :interval="4000" type="card" height="200px" trigger="click">
         <el-carousel-item v-for="pic in bannerimgurls" :key="pic">
-          <img :src="pic" />
+          <img :src="pic" width="100%" height="100%" />
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -98,6 +98,7 @@ export default {
   name: "Home",
   data() {
     return {
+      state: "",
       options: [
         {
           value: "职位",
@@ -117,9 +118,9 @@ export default {
         require("../../assets/banner4.png")
       ],
       hotSearch: {
-        first: "热门搜索1",
-        second: "热门搜索2",
-        third: "热门搜索3"
+        first: "互联网",
+        second: "销售",
+        third: "项目经理"
       },
       jobList: [
         {
@@ -190,6 +191,14 @@ export default {
         .then(response => {
           if (response.data.error_num === "0") {
             this.jobList = response.data.data;
+            this.state = response.data.time;
+            if (this.state === "1") {
+              this.$message({
+                showClose: true,
+                message: "你投递的岗位有新进展了",
+                type: "success"
+              });
+            }
           } else {
             this.$message.error("推荐职位信息失败");
             console.log(response.data.msg);

@@ -66,7 +66,7 @@
     <div class="banner">
       <el-carousel :interval="4000" type="card" height="200px" trigger="click">
         <el-carousel-item v-for="pic in bannerimgurls" :key="pic">
-          <img :src="pic" />
+          <img :src="pic" width="100%" height="100%"/>
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -117,9 +117,9 @@ export default {
         require("../../assets/banner4.png")
       ],
       hotSearch: {
-        first: "热门搜索1",
-        second: "热门搜索2",
-        third: "热门搜索3"
+        first: "机械",
+        second: "销售",
+        third: "项目经理"
       },
       talkList: [
         {

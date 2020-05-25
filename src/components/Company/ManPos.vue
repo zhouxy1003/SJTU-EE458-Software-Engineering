@@ -103,8 +103,8 @@
         <el-dialog title="简历列表" :visible.sync="resumeListVisible" width="50%">
           <el-table :data="resumeData" style="width: 100%">
             <el-table-column prop="sname" label="姓名" width="180"></el-table-column>
-            <el-table-column prop="stel" label="电话" width="180"></el-table-column>
-            <el-table-column prop="email" label="邮箱" width="180"></el-table-column>
+            <el-table-column prop="school" label="学校" width="180"></el-table-column>
+            <el-table-column prop="major" label="专业" width="180"></el-table-column>
             <el-table-column label="操作" width="180">
               <template v-slot="scope">
                 <el-button type="primary" @click="showResumeContent(scope.row.content)">查看</el-button>
@@ -117,6 +117,9 @@
           </span>
         </el-dialog>
         <el-dialog title="简历内容" :visible.sync="resumeContentVisible" width="30%">
+          <h4>个人信息</h4>
+          <p>手机：{{resumeContent.stel}}</p>
+          <p>邮箱：{{resumeContent.email}}</p>
           <h4>教育信息</h4>
           <p>学校名称：{{resumeContent.school}}</p>
           <p>专业名称：{{resumeContent.major}}</p>
@@ -155,9 +158,11 @@ export default {
         {
           id: "0",
           sname: "张三",
-          stel: "13800000000",
-          email: "123@qq.com",
+          school: "上海交通大学",
+          major: "计算机科学与技术",
           content: {
+            stel: "13800000000",
+            email: "123@qq.com",
             school: "上海交通大学",
             major: "计算机科学与技术",
             eduBegin: "2017.09",
