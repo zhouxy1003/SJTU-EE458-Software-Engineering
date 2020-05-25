@@ -38,13 +38,13 @@
     </el-menu>
     <div v-if="jobList.length>0">
         <el-card class="searchResult" v-for="(job, index) in jobList" :key="index">
-          <el-link type="primary" @click="jobDetail(job.jobid)">{{job.jname}}</el-link>
+          <el-link type="primary" @click="jobDetail(job.pk)">{{job.fields.jname}}</el-link>
           <p>
-            <span>{{job.salary}}</span>
+            <span>{{job.fields.salary}}</span>
             <el-divider direction="vertical"></el-divider>
-            <span>{{job.jplace}}</span>
+            <span>{{job.fields.jplace}}</span>
             <el-divider direction="vertical"></el-divider>
-            <span>{{job.cname}}</span>
+            <span>{{job.fields.cname}}</span>
           </p>
           <p>
             <span>投递时间：<el-tag>这里改成demo那天的时间</el-tag></span>
@@ -64,32 +64,42 @@ export default {
       activeIndex: "/Student/MyJob",
       jobList: [
         {
-          jobid: '1',
-          jname: "C++研发实习生",
-          salary: "300-400元/天",
-          jplace: "北京",
-          cname: "北京蓦然认知科技有限公司"
+          pk: "1",
+          fields: {
+            jname: "C++研发实习生",
+            salary: "300-400元/天",
+            jplace: "北京",
+            cname: "北京蓦然认知科技有限公司"
+          }
         },
         {
-          jobid: '2',
-          jname: "后端研发实习生",
-          salary: "250-300元/天",
-          jplace: "杭州",
-          cname: "杭州艾耕科技有限公司"
+          pk: "2",
+          fields: {
+            jname: "后端研发实习生",
+            salary: "250-300元/天",
+            jplace: "杭州",
+            cname: "杭州艾耕科技有限公司"
+          }
         },
         {
-          jobid: '3',
-          jname: "阿里健康java实习生",
-          salary: "250-300元/天",
-          jplace: "北京",
-          cname: "阿里健康"
+          pk: "3",
+          fields: {
+            jobid: "3",
+            jname: "阿里健康java实习生",
+            salary: "250-300元/天",
+            jplace: "北京",
+            cname: "阿里健康"
+          }
         },
         {
-          jobid: '4',
-          jname: "大数据开发实习生",
-          salary: "150-200元/天",
-          jplace: "上海",
-          cname: "上海比孚信息科技有限公司"
+          pk: "4",
+          fields: {
+            jobid: "4",
+            jname: "大数据开发实习生",
+            salary: "150-200元/天",
+            jplace: "上海",
+            cname: "上海比孚信息科技有限公司"
+          }
         }
       ] // 推荐数据
     };
@@ -106,7 +116,12 @@ export default {
           }
         })
         .then(response => {
-          this.jobList = response.data;
+          if (response.data.error_num === "0") {
+            this.jobList = response.data.data;
+          } else {
+            this.$message.error("获取我投递的职位信息失败");
+            console.log(response.data.msg);
+          }
         });
     },
     jobDetail(id) {
