@@ -178,7 +178,12 @@ export default {
           }
         })
         .then(response => {
-          this.jobList = response.data;
+          if (response.data.error_num === 0) {
+            this.jobList = response.data.data;
+          } else {
+            this.$message.error("无推荐信息");
+            console.log(response.data.msg);
+          }
         });
     },
     jobDetail(id) {
