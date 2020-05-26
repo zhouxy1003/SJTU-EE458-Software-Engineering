@@ -187,14 +187,22 @@ export default {
       },
       tableData: [
         {
-          jname: "web前端开发实习生",
+          jname: "测试工程师",
           jplace: "上海",
-          salary: "200/天",
-          place: "上海市普陀区金沙江路 1517 弄",
+          salary: "10000-15000元/月",
           detail:
-            "1.参与公司产品的前端开发工作（包括PC、以及移动端开发）；2.与产品经理沟通，完成设计交互的UI实现；",
+            "完成公司项目、产品的所有相关测试工作",
           requirement:
-            "本科及以上学历；熟练掌握HTML/CSS/XML/JSON，对HTTP协议足够熟悉；思路清晰，具备良好的沟通能力和理解能力"
+            "相关专业本科以上学历，英语良好"
+        },
+        {
+          jname: "后台开发工程师",
+          jplace: "上海",
+          salary: "面议",
+          detail:
+            "负责通用业务组件的开发和维护",
+          requirement:
+            "本科以上学历，计算机相关专业，熟悉分布式系统设计"
         }
       ],
       formLabelWidth: "600px"
