@@ -111,6 +111,7 @@ export default {
   created() {
     this.jobDetail.jobid = this.$route.query.jobid;
     this.showJob(this.jobDetail.jobid);
+    this.showCompany(this.jobDetail.jobid);
   },
   methods: {
     showJob(id) {
