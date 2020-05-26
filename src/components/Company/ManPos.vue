@@ -160,8 +160,8 @@ export default {
           school: "上海交通大学",
           major: "计算机科学与技术",
           content: {
-            stel: "13800000000",
-            email: "123@qq.com",
+            stel: "15201967357",
+            email: "772918068@qq.com",
             school: "上海交通大学",
             major: "计算机科学与技术",
             eduBegin: "2017.09",

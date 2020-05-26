@@ -149,22 +149,22 @@ export default {
       xcontent: "",
       studentInfo: [
         {
-          sname: "张三",
-          tel: "13800000000"
+          sname: "王鑫凯",
+          tel: "15201967357"
         }
       ],
       studentVisible: false,
       tableData: [
         {
           seminarid: "0",
-          sname: "宣传会名称1",
-          splace: "闵行校区东下院105",
-          sdate: "2020-5-30",
-          stheme: "人工智能",
-          sactivity: "内推资格，面试直通车",
-          scontent: "邀请xxx为同学们讲述人工智能目前的应用领域及前景",
-          sbegin: "08:30",
-          send: "10:30"
+          sname: "腾讯AI实验室暑期实习招聘",
+          splace: "上海交通大学东中院1-107",
+          sdate: "2020-3-29",
+          stheme: "自然语言处理",
+          sactivity: "内推资格",
+          scontent: "招聘自然语言处理方面优秀人才",
+          sbegin: "10:30",
+          send: "11:30"
         }
       ]
     };

@@ -104,6 +104,7 @@ export default {
   created() {
     this.talkDetail.seminarid = this.$route.query.seminarid;
     this.showTalk(this.talkDetail.seminarid);
+    this.showCompany(this.talkDetail.seminarid);
   },
   methods: {
     showTalk(id) {
@@ -131,7 +132,7 @@ export default {
       this.$axios
         .get(this.HOME + "/api/show_company", {
           params: {
-            jobid: this.jobDetail.jobid
+            seminarid: this.talkDetail.seminarid
           }
         })
         .then(response => {
