@@ -272,29 +272,29 @@ export default {
       // });
     },
     loginCompany() {
-      // this.$axios
-      //   .get(this.HOME + "/api/company_login", {
-      //     params: {
-      //       cloginid: this.companyForm2.loginid,
-      //       cpassword: this.companyForm2.password
-      //     }
-      //   })
-      //   .then(response => {
-      //     // var res = JSON.parse(response.bodyText);
-      //     if (response.data.error_num === 0) {
-      //       this.Global.loginid = this.companyForm2.loginid;
-      //       this.$router.push({
-      //         path: "/Company/Enterprice"
-      //       });
-      //     } else {
-      //       this.$message.error("密码错误，请重试");
-      //       console.log(response.data.msg);
-      //     }
-      //   });
-      this.Global.loginid = this.companyForm2.loginid;
-      this.$router.push({
-        path: "/Company/Enterprice"
-      });
+      this.$axios
+        .get(this.HOME + "/api/company_login", {
+          params: {
+            cloginid: this.companyForm2.loginid,
+            cpassword: this.companyForm2.password
+          }
+        })
+        .then(response => {
+          // var res = JSON.parse(response.bodyText);
+          if (response.data.error_num === 0) {
+            this.Global.loginid = this.companyForm2.loginid;
+            this.$router.push({
+              path: "/Company/Enterprice"
+            });
+          } else {
+            this.$message.error("密码错误，请重试");
+            console.log(response.data.msg);
+          }
+        });
+      // this.Global.loginid = this.companyForm2.loginid;
+      // this.$router.push({
+      //   path: "/Company/Enterprice"
+      // });
     },
     resetForm(form) {
       this.$refs[form].resetFields();
