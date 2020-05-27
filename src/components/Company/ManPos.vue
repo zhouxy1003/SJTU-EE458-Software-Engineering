@@ -34,7 +34,9 @@
         active-text-color="#ffd04b"
         router
       >
-        <el-menu-item index="/Company/Enterprice" class="el-icon-setting">资料完善</el-menu-item>
+        <el-menu-item index="/Company/Enterprice">
+          <i class="el-icon-setting"></i>资料完善
+        </el-menu-item>
 
         <el-submenu index="2">
           <template slot="title">
@@ -51,9 +53,10 @@
           <el-menu-item index="/Company/NewTalk">发布宣讲会</el-menu-item>
           <el-menu-item index="/Company/ManTalk">管理宣讲会</el-menu-item>
         </el-submenu>
-        <el-menu-item index="/Company/ResSer" class="el-icon-document">简历库</el-menu-item>
+        <el-menu-item index="/Company/ResSer">
+          <i class="el-icon-document"></i>简历库
+        </el-menu-item>
       </el-menu>
-
       <el-card class="pos">
         <el-table :data="tableData" style="width: 900px">
           <el-table-column label="职位名称" width="180" prop="jname"></el-table-column>
@@ -76,7 +79,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-dialog title="提示" :visible.sync="dialogFormVisible" width="30%">
+        <el-dialog title="提示" :visible.sync="dialogFormVisible" width="40%">
           <el-form :model="editObj">
             <el-form-item label="职位名称">
               <el-input v-model="editObj.jname" auto-complete="off"></el-input>
@@ -100,12 +103,12 @@
           </span>
         </el-dialog>
 
-        <el-dialog title="简历列表" :visible.sync="resumeListVisible" width="50%">
+        <el-dialog title="简历列表" :visible.sync="resumeListVisible" width="40%">
           <el-table :data="resumeData" style="width: 100%">
-            <el-table-column prop="sname" label="姓名" width="180"></el-table-column>
+            <el-table-column prop="sname" label="姓名" width="100"></el-table-column>
             <el-table-column prop="school" label="学校" width="180"></el-table-column>
             <el-table-column prop="major" label="专业" width="180"></el-table-column>
-            <el-table-column label="操作" width="180">
+            <el-table-column label="操作" width="100">
               <template v-slot="scope">
                 <el-button type="primary" @click="showResumeContent(scope.row.content)">查看</el-button>
               </template>
@@ -116,7 +119,7 @@
             <el-button type="primary" @click="resumeListVisible = false">确 定</el-button>
           </span>
         </el-dialog>
-        <el-dialog title="简历内容" :visible.sync="resumeContentVisible" width="30%">
+        <el-dialog title="简历内容" :visible.sync="resumeContentVisible" width="40%">
           <h4>个人信息</h4>
           <p>手机：{{resumeContent.stel}}</p>
           <p>邮箱：{{resumeContent.email}}</p>
@@ -190,19 +193,15 @@ export default {
           jname: "测试工程师",
           jplace: "上海",
           salary: "10000-15000元/月",
-          detail:
-            "完成公司项目、产品的所有相关测试工作",
-          requirement:
-            "相关专业本科以上学历，英语良好"
+          detail: "完成公司项目、产品的所有相关测试工作",
+          requirement: "相关专业本科以上学历，英语良好"
         },
         {
           jname: "后台开发工程师",
           jplace: "上海",
           salary: "面议",
-          detail:
-            "负责通用业务组件的开发和维护",
-          requirement:
-            "本科以上学历，计算机相关专业，熟悉分布式系统设计"
+          detail: "负责通用业务组件的开发和维护",
+          requirement: "本科以上学历，计算机相关专业，熟悉分布式系统设计"
         }
       ],
       formLabelWidth: "600px"
@@ -336,7 +335,7 @@ export default {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 15%;
-  margin-right: 20%;
+  margin-right: 15%;
   padding-left: 5%;
   padding-right: 5%;
 }

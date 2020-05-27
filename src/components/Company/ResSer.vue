@@ -34,7 +34,9 @@
         active-text-color="#ffd04b"
         router
       >
-        <el-menu-item index="/Company/Enterprice" class="el-icon-setting">资料完善</el-menu-item>
+        <el-menu-item index="/Company/Enterprice">
+          <i class="el-icon-setting"></i>资料完善
+        </el-menu-item>
 
         <el-submenu index="2">
           <template slot="title">
@@ -51,7 +53,9 @@
           <el-menu-item index="/Company/NewTalk">发布宣讲会</el-menu-item>
           <el-menu-item index="/Company/ManTalk">管理宣讲会</el-menu-item>
         </el-submenu>
-        <el-menu-item index="/Company/ResSer" class="el-icon-document">简历库</el-menu-item>
+        <el-menu-item index="/Company/ResSer">
+          <i class="el-icon-document"></i>简历库
+        </el-menu-item>
       </el-menu>
 
       <el-card class="search">
@@ -76,7 +80,7 @@
           </el-table-column>
         </el-table>
 
-        <el-dialog title="简历内容" :visible.sync="contentVisible" width="50%">
+        <el-dialog title="简历内容" :visible.sync="contentVisible" width="40%">
           <h4>个人信息</h4>
           <p>手机：{{resumeContent.stel}}</p>
           <p>邮箱：{{resumeContent.email}}</p>
@@ -118,13 +122,12 @@ export default {
       searchData: [],
       resData: [
         {
-          id: "0",
-          sname: "李四",
+          sname: "王鑫凯",
           school: "上海交通大学",
           major: "计算机科学与技术",
           content: {
-            stel: "13800000000",
-            email: "123@qq.com",
+            stel: "15201967357",
+            email: "772918068@qq.com",
             school: "上海交通大学",
             major: "计算机科学与技术",
             eduBegin: "2017.09",
@@ -140,15 +143,14 @@ export default {
           }
         },
         {
-          id: "1",
-          sname: "张三",
+          sname: "李世杰",
           school: "上海交通大学",
-          major: "计算机科学与技术",
+          major: "船舶与海洋工程",
           content: {
-            stel: "13800000000",
-            email: "123@qq.com",
+            stel: "13923564684",
+            email: "74369646805@qq.com",
             school: "上海交通大学",
-            major: "计算机科学与技术",
+            major: "船舶与海洋工程",
             eduBegin: "2017.09",
             grade: "大三",
             cname: "字节跳动",
@@ -162,15 +164,56 @@ export default {
           }
         },
         {
-          id: "2",
-          sname: "王五",
+          sname: "陈源",
           school: "上海交通大学",
-          major: "计算机科学与技术",
+          major: "生物医学工程",
           content: {
-            stel: "13800000000",
-            email: "123@qq.com",
+            stel: "15201967357",
+            email: "772918068@qq.com",
             school: "上海交通大学",
-            major: "计算机科学与技术",
+            major: "生物医学工程",
+            eduBegin: "2017.09",
+            grade: "大三",
+            cname: "字节跳动",
+            industry: "互联网",
+            pname: "前端实习生",
+            place: "上海",
+            expBegin: "2019.07--2019.08",
+            detail: "参与前端ui设计",
+            skill: "熟悉c++，熟悉css+javascript,了解python",
+            self: "我是一个认真负责的人"
+          }
+        },
+        {
+          sname: "卢浩文",
+          school: "上海交通大学",
+          major: "电气工程及其自动化",
+          content: {
+            stel: "15201967357",
+            email: "772918068@qq.com",
+            school: "上海交通大学",
+            major: "电气工程及其自动化",
+            eduBegin: "2017.09",
+            grade: "大三",
+            cname: "字节跳动",
+            industry: "互联网",
+            pname: "前端实习生",
+            place: "上海",
+            expBegin: "2019.07--2019.08",
+            detail: "参与前端ui设计",
+            skill: "熟悉c++，熟悉css+javascript,了解python",
+            self: "我是一个认真负责的人"
+          }
+        },
+        {
+          sname: "高天云",
+          school: "上海交通大学",
+          major: "数学与应用数学",
+          content: {
+            stel: "15201967357",
+            email: "772918068@qq.com",
+            school: "上海交通大学",
+            major: "数学与应用数学",
             eduBegin: "2017.09",
             grade: "大三",
             cname: "字节跳动",
@@ -226,6 +269,8 @@ export default {
             );
           });
         });
+      } else {
+        this.searchData = this.resData;
       }
     },
     // 返回主页
@@ -305,8 +350,8 @@ export default {
   width: 60%;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 #hotSearch {
   font-size: 15px;

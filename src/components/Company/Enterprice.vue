@@ -34,7 +34,7 @@
         active-text-color="#ffd04b"
         router
       >
-        <el-menu-item index="/Company/Enterprice" class="el-icon-setting">资料完善</el-menu-item>
+        <el-menu-item index="/Company/Enterprice" ><i class="el-icon-setting"></i>资料完善</el-menu-item>
 
         <el-submenu index="2">
           <template slot="title">
@@ -51,7 +51,7 @@
           <el-menu-item index="/Company/NewTalk">发布宣讲会</el-menu-item>
           <el-menu-item index="/Company/ManTalk">管理宣讲会</el-menu-item>
         </el-submenu>
-        <el-menu-item index="/Company/ResSer" class="el-icon-document">简历库</el-menu-item>
+        <el-menu-item index="/Company/ResSer" ><i class="el-icon-document"></i>简历库</el-menu-item>
       </el-menu>
       <el-row class="tac"></el-row>
 
@@ -118,7 +118,7 @@
       </el-card>
       <el-row color:transparent class="button">
         <el-col :span="1" :offset="0">
-          <el-button round icon="el-icon-edit" @click="companyDialogFormVisible = true"></el-button>
+          <el-button round icon="el-icon-edit" @click="companyDialogFormVisible = true">编辑资料</el-button>
         </el-col>
       </el-row>
     </el-container>
@@ -266,27 +266,18 @@ export default {
 }
 
 .basic {
-  position: absolute;
   width: 50%;
-
-  top: 20%;
-  //bottom: 20px;
-  left: 20%;
-  //right: 20%;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  margin-left: 20%;
+  margin-right: 20%;
   padding-left: 5%;
   padding-right: 5%;
 }
 .button {
-  background: transparent;
-  color: transparent;
-  position: absolute;
-  margin-top: 500px;
-  margin-bottom: 500px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   margin-left: 45%;
-  padding-left: 0%;
-  padding-right: 0%;
-  padding-left: -5px;
-  padding-right: 6%;
 }
 
 .el-dialog {

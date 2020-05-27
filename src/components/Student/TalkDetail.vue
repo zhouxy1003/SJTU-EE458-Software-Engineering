@@ -1,6 +1,7 @@
 <template>
   <el-container direction="vertical">
     <el-row class="top-bar">
+       <img src="../../assets/ijob.png" class="image" />
       <el-col :span="3" :offset="2">
         <div class="headText1" @click="backToMain()">
           <h4>校园招聘系统</h4>
@@ -26,12 +27,16 @@
       class="menu"
       mode="horizontal"
       @select="handleSelect"
+      background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b"
       router
     >
-      <el-menu-item index="/Student/Home">首页</el-menu-item>
-      <el-menu-item index="/Student/Resume">简历管理</el-menu-item>
+       
+ <el-menu-item index="/Student/Home" ><i class="el-icon-s-home"></i>首页</el-menu-item>
+      <el-menu-item index="/Student/Resume" ><i class="el-icon-document"></i>简历管理</el-menu-item>
       <el-submenu index="3">
-        <template slot="title">我的</template>
+        <template slot="title" ><i class="el-icon-s-custom"></i> 我的</template>
         <el-menu-item index="/Student/MyJob">我投递的职位</el-menu-item>
         <el-menu-item index="/Student/MyTalk">我报名的宣讲会</el-menu-item>
       </el-submenu>
@@ -181,12 +186,20 @@ export default {
 
 <style lang="scss" scoped>
 .top-bar {
-  background: #446699;
+  background: #646e77;
   color: white;
   a {
     color: white;
   }
   height: 60px;
+}
+.image {
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  left: 10px;
+  top: 10px;
+  display: block;
 }
 .headText1 {
   position: relative;

@@ -34,7 +34,7 @@
         active-text-color="#ffd04b"
         router
       >
-        <el-menu-item index="/Company/Enterprice" class="el-icon-setting">资料完善</el-menu-item>
+          <el-menu-item index="/Company/Enterprice" ><i class="el-icon-setting"></i>资料完善</el-menu-item>
 
         <el-submenu index="2">
           <template slot="title">
@@ -51,7 +51,7 @@
           <el-menu-item index="/Company/NewTalk">发布宣讲会</el-menu-item>
           <el-menu-item index="/Company/ManTalk">管理宣讲会</el-menu-item>
         </el-submenu>
-        <el-menu-item index="/Company/ResSer" class="el-icon-document">简历库</el-menu-item>
+        <el-menu-item index="/Company/ResSer" ><i class="el-icon-document"></i>简历库</el-menu-item>
       </el-menu>
       <!-- 表格内容 -->
       <el-card class="pos">
@@ -83,7 +83,7 @@
           <el-button type="primary" @click="studentVisible = false">确 定</el-button>
         </span>
       </el-dialog>
-      <el-dialog title="宣讲内容" :visible.sync="contentVisible" width="50%">
+      <el-dialog title="宣讲内容" :visible.sync="contentVisible" width="40%">
         <el-form :model="contentForm">
           <el-form-item label="宣讲会名称">
             <el-input v-model="contentForm.sname" auto-complete="off"></el-input>
@@ -261,20 +261,20 @@ export default {
   display: block;
 }
 .pos {
-  width: 65%;
+  width: 60%;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-left: 13%;
-  margin-right: 20%;
+  margin-left: 15%;
+  margin-right: 15%;
   padding-left: 5%;
   padding-right: 5%;
 }
 .talk {
-  width: 50%;
+  width: 60%;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 15%;
+  margin-right: 15%;
   padding-left: 5%;
   padding-right: 5%;
 }

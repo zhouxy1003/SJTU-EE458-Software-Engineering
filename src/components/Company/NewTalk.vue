@@ -34,7 +34,7 @@
         active-text-color="#ffd04b"
         router
       >
-        <el-menu-item index="/Company/Enterprice" class="el-icon-setting">资料完善</el-menu-item>
+           <el-menu-item index="/Company/Enterprice" ><i class="el-icon-setting"></i>资料完善</el-menu-item>
 
         <el-submenu index="2">
           <template slot="title">
@@ -51,7 +51,7 @@
           <el-menu-item index="/Company/NewTalk">发布宣讲会</el-menu-item>
           <el-menu-item index="/Company/ManTalk">管理宣讲会</el-menu-item>
         </el-submenu>
-        <el-menu-item index="/Company/ResSer" class="el-icon-document">简历库</el-menu-item>
+        <el-menu-item index="/Company/ResSer" ><i class="el-icon-document"></i>简历库</el-menu-item>
       </el-menu>
       <el-col class="line" :span="2">-</el-col>
       <el-card class="talk">
